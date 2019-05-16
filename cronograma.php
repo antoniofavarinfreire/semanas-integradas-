@@ -25,16 +25,16 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="index.php">Home</a>
+          </li>
           <li class="nav-item active">
-            <a class="nav-link" href="#">Home
+            <a class="nav-link" href="#">Cronograma
               <span class="sr-only">(current)</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="cronograma.php">Cronograma</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="minicursos.php">Minicursos</a>
+            <a class="nav-link" href="minucursos.php">Minicursos</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="palestras.php">Palestras</a>
@@ -48,7 +48,7 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12 text-center">
-        <h1 class="mt-5">Semanas Integradas</h1>
+        <h1 class="mt-5">Cronograma</h1>
       </div>
     </div>
   </div>
