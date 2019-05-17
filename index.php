@@ -7,7 +7,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Semanas Integradas</title>
+  <title>Semanas Eventos Integradas</title>
 
   <!-- Bootstrap core CSS -->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -19,7 +19,7 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
     <div class="container">
-      <a class="navbar-brand" href="#">Semanas Integradas</a>
+      <a class="navbar-brand" href="#">Semanas Eventos Integradas</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -39,6 +39,9 @@
           <li class="nav-item">
             <a class="nav-link" href="palestras.php">Palestras</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="cronograma.php">login</a> <!-- teste para uma posivel tela de login, estou testando uma nova bootstrap-->
+          </li>
         </ul>
       </div>
     </div>
@@ -48,7 +51,7 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12 text-center">
-        <h1 class="mt-5">Semanas Integradas</h1>
+        <h1 class="mt-5">Semanas Eventos Integradas</h1>
       </div>
     </div>
   </div>
