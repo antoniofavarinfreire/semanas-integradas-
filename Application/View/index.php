@@ -31,7 +31,7 @@
             <a class="nav-link" href="palestras.php">Palestras</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Logins</a> <!-- teste para uma posivel tela de login, estou testando uma nova bootstrap-->
+            <a class="nav-link" href="./login">Login</a> <!-- teste para uma posivel tela de login, estou testando uma nova bootstrap-->
           </li>
         </ul>
       </div>
