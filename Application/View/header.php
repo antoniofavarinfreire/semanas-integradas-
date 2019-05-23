@@ -10,6 +10,7 @@
 
   <!-- Bootstrap core CSS -->
   <link href="../../Assets/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../Assets/css/style.css">
 
 </head>
 </html>

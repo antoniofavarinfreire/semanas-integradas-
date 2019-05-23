@@ -1,0 +1,84 @@
+body {
+	background-color: #eee;
+}
+
+#dados {
+	color: #342C2F;
+	font-size: 1.2em;
+	font-family: serif;
+}
+
+#deg {
+	padding-top: 5%;
+	padding-left: 5%;
+	padding-right: 5%;
+}
+
+#dados-usuario {
+	position: relative;
+	margin: 1% 0 0 1%;
+	width: 40%;
+	height: auto;
+	float: left;	
+}
+
+#grafico {
+	position: relative;
+	width: 55%;
+	height: auto;
+	float: left;
+	height: all;
+	margin: 1% 1% 0 0;
+}
+
+#h3ud {
+	text-align: left;
+	margin-left: 5%;	
+}
+
+#ud {
+	padding-left: 2.5%;
+	width: 80%;
+	float: left;
+}
+
+#liud {
+	border: 0.5px solid black;
+	margin: 1% 0 0 1%;
+	width: auto;
+}
+
+#img {
+	width: 100%;
+	height: auto;
+}
+
+.grid-test{
+	display: grid;
+	padding: 0 0.5% 0 0.5%;
+	border: 0.8px solid #ddd;
+	width: 70%;
+}
+
+.grid-item-test {
+  border-bottom: 0.5px solid #ddd;
+  padding: 1% 0.5% 1% 0.5%;
+  margin: 1% 0 0 0;
+}
+
+#botao {
+	width: 100%;
+	position: relative;
+	float: left;
+	margin: 5% 0 0 5%;
+}
+
+#button {
+	border: 0.5px solid #aaa;
+	border-radius: 5px;
+	color: #555;
+	font-size: 1.2em;
+	background-color: #14e514;
+	box-shadow: 2px 2px #555;
+	height: 3em;
+}

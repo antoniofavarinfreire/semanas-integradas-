@@ -43,6 +43,13 @@
     <div class="row">
       <div class="col-lg-12 text-center">
         <h1 class="mt-5">Semanas Eventos Integradas</h1>
+        <?php 
+          session_start();
+          if (isset($_SESSION['message'])){
+            echo '<h1>'.$_SESSION['message'].'</h1>';
+            session_destroy();
+          }
+        ?>
       </div>
     </div>
   </div>
