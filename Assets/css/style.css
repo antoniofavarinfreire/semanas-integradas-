@@ -2,6 +2,11 @@ body {
 	background-color: #eee;
 }
 
+span {
+	font-family: sans-serif;
+	font-size: 1em;
+}
+
 #dados {
 	color: #342C2F;
 	font-size: 1.2em;
@@ -81,4 +86,69 @@ body {
 	background-color: #14e514;
 	box-shadow: 2px 2px #555;
 	height: 3em;
+}
+
+#cadastro {
+	position: relative;
+	width: 30%;
+	margin-left: 35%;
+	margin-top: 10%;
+	float:left;
+}
+
+.cadSpan{
+	text-align: center;
+	font-family: sans-serif;
+	font-size: 1.1em;
+	margin-right: 40%;
+}
+
+.cadInput{
+	width: 100%;
+	margin-right: 40%;
+	margin-bottom: 4%;
+	border-radius: 15px;
+	padding-left: 3%;
+	padding-right: 3%;
+	border: 1px solid;
+	box-shadow: 2px 2px #aaa;
+}
+
+.cadInput:focus {
+	border-color: #44f;
+}
+
+.inputButton {
+	float: left;
+	position:relative;
+	background-color: #45ef45;
+	border-radius: 5px;
+	border: 0.5px solid #45ef45;
+	box-shadow: 2px 2px #ccc;
+}
+
+.inputButton:hover {
+	background-color: #8f8;
+	color: #aaa;
+}
+
+.radioButton {
+	position: relative;
+	float:left;
+}
+
+#rightRadio {
+	margin-left: 10%;
+}
+
+.span {
+	position: relative;
+	float:left;
+	margin-right: 5%;
+	font-family: sans-serif;
+	font-size: 1.1em;
+}
+
+#hiddenInput {
+	display: none;
 }
