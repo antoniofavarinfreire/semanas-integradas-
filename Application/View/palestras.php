@@ -47,6 +47,30 @@
     <div class="row">
       <div class="col-lg-12 text-center">
         <h1 class="mt-5">Palestras</h1>
+        <div id="bloco">
+          <h6 id="caixa">Palestras Computação</h6>
+          <p id="info-bloco">lista de palestras</p>
+        </div>
+        <div id="bloco">
+          <h6 id="caixa">Palestras Engenharia Elétrica</h6>
+          <p id="info-bloco">lista de palestras</p>
+        </div>
+        <div id="bloco">
+          <h6 id="caixa">Palestras Engenharia Mecânica</h6>
+          <p id="info-bloco">lista de palestras</p>
+        </div>
+        <div id="bloco">
+          <h6 id="caixa">Palestras Engenharia de Produção</h6>
+          <p id="info-bloco">lista de palestras</p>
+        </div>
+        <div id="bloco">
+          <h6 id="caixa">Palestras Engenharia Civil</h6>
+          <p id="info-bloco">lista de palestras</p>
+        </div>
+        <div id="bloco">
+          <h6 id="caixa">Palestras Licenciaturas</h6>
+          <p id="info-bloco">lista de palestras</p>
+        </div>
       </div>
     </div>
   </div>

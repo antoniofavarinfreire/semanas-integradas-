@@ -47,6 +47,30 @@
     <div class="row">
       <div class="col-lg-12 text-center">
         <h1 class="mt-5">Minicursos</h1>
+        <div id="bloco">
+          <h6 id="caixa">Minicursos Computação</h6>
+          <p id="info-bloco">lista de minicursos</p>
+        </div>
+        <div id="bloco">
+          <h6 id="caixa">Minicursos Engenharia Elétrica</h6>
+          <p id="info-bloco">lista de minicursos</p>
+        </div>
+        <div id="bloco">
+          <h6 id="caixa">Minicursos Engenharia Mecânica</h6>
+          <p id="info-bloco">lista de minicursos</p>
+        </div>
+        <div id="bloco">
+          <h6 id="caixa">Minicursos Engenharia de Produção</h6>
+          <p id="info-bloco">lista de minicursos</p>
+        </div>
+        <div id="bloco">
+          <h6 id="caixa">Minicursos Engenharia Civil</h6>
+          <p id="info-bloco">lista de minicursos</p>
+        </div>
+        <div id="bloco">
+          <h6 id="caixa">Minicursos Licenciaturas</h6>
+          <p id="info-bloco">lista de minicursos</p>
+        </div>
       </div>
     </div>
   </div>

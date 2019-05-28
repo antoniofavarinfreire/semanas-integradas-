@@ -152,3 +152,24 @@ span {
 #hiddenInput {
 	display: none;
 }
+
+#caixa {
+	color: white;
+	font-size: 150%;
+	padding: 1.1% 5% 1% 5%;
+	background-color: #000000;
+}
+
+#bloco {
+	font-family: sans-serif;
+	border: none;
+	padding: 4% 5% 1% 5%;
+	float: initial;
+	background-color: #342C2F;
+}
+
+#info-bloco{
+	padding: 1% 0% 0% 0%;
+	text-align: center;
+	color: white;
+}
