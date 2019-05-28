@@ -29,7 +29,7 @@
             </a> <!-- teste para uma posivel tela de login, estou testando uma nova bootstrap-->
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="./login">Login</a> <!-- teste para uma posivel tela de login, estou testando uma nova bootstrap-->
+            <a class="nav-link" href="./login/login_form_sign_in.html">Login</a> <!-- teste para uma posivel tela de login, estou testando uma nova bootstrap-->
           </li>
         </ul>
       </div>
@@ -43,7 +43,9 @@
   		<span class="cadSpan">Digite seu email:</span>
   		<input type="email" name="email" placeholder="usuario@email.com" class="cadInput" required>
   		<span class="cadSpan">Crie uma senha:</span>
-  		<input type="password" name="senha" placeholder="********" class="cadInput" required>
+      <input type="password" name="senha" placeholder="********" class="cadInput" required>
+      <span class="cadSpan">Data de Nascimento:</span>
+      <input type="date" name="Data de Nascimento" placeholder="********" class="cadInput" required>
   		<span class="span">É aluno:</span>
  		<input type="radio" name="aluno" value="sim" class="radioInput"><span class="radioInput">Sim</span>
  		<input type="radio" name="aluno" value="nao" class="radioInput" id="rightRadio"><span class="radioInput">Não</span>
@@ -53,8 +55,15 @@
   			<span class="cadSpan">Digite seu cpf:</span>
   			<input class="cadInput" type="text" name="cpf" placeholder="123.456.789-00">
   		</div>
-		<input type="submit" class="inputButton" value="Enviar">
-  	</form>
+    <!--<input type="submit" class="inputButton" value="Enviar">-->
+      <a href="" class="btn btn-block btn-outline-info"> <i class="fab fa-twitter"></i>   Login via Google</a>
+      <a href="" class="btn btn-block btn-outline-primary"> <i class="fab fa-facebook-f"></i>   Login via facebook</a>
+      <a href="" class="btn btn-block btn-outline-primary"> <i class="fab fa-facebook-f"></i>   Criar Cadastro</a>
+    </form>
+    <p>
+      
+    </p>
+    
   </div>
 </body>
 </html>
