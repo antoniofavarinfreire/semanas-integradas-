@@ -34,7 +34,7 @@
             <a class="nav-link" href="cadastro.php">Cadastro</a> <!-- teste para uma posivel tela de login, estou testando uma nova bootstrap-->
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="./login">Login</a> <!-- teste para uma posivel tela de login, estou testando uma nova bootstrap-->
+            <a class="nav-link" href="./login/examples/dashboard.html">Login</a> <!-- teste para uma posivel tela de login, estou testando uma nova bootstrap-->
           </li>
         </ul>
       </div>
