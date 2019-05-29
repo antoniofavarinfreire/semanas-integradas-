@@ -165,11 +165,10 @@ span {
 	border: none;
 	padding: 4% 5% 1% 5%;
 	float: initial;
-	background-color: #342C2F;
 }
 
 #info-bloco{
 	padding: 1% 0% 0% 0%;
 	text-align: center;
-	color: white;
+	color: black;
 }
