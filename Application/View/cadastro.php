@@ -29,7 +29,7 @@
             </a> <!-- teste para uma posivel tela de login, estou testando uma nova bootstrap-->
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="./login/login_form_sign_in.html">Login</a> <!-- teste para uma posivel tela de login, estou testando uma nova bootstrap-->
+            <a class="nav-link" href="./login/login_via.html">Login</a> <!-- teste para uma posivel tela de login, estou testando uma nova bootstrap-->
           </li>
         </ul>
       </div>
@@ -56,7 +56,7 @@
   			<input class="cadInput" type="text" name="cpf" placeholder="123.456.789-00">
   		</div>
     <!--<input type="submit" class="inputButton" value="Enviar">-->
-      <a href="" class="btn btn-block btn-outline-info"> <i class="fab fa-twitter"></i>   Login via Google</a>
+      <a href="" class="btn btn-block btn-outline-info"> <i class="fab fa-google"></i>   Login via Google</a>
       <a href="" class="btn btn-block btn-outline-primary"> <i class="fab fa-facebook-f"></i>   Login via facebook</a>
       <a href="" class="btn btn-block btn-outline-primary"> <i class="fab fa-facebook-f"></i>   Criar Cadastro</a>
     </form>
