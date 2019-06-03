@@ -172,3 +172,15 @@ span {
 	text-align: center;
 	color: black;
 }
+
+#radioLine{
+	width:100%;
+	float: left;
+	margin-bottom: 2%;
+}
+
+.sbmbtn {
+	float: left;
+	width: 50%;
+	margin-right: 1%;
+}

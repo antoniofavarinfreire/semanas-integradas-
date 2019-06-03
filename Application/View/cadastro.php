@@ -45,20 +45,26 @@
   		<span class="cadSpan">Crie uma senha:</span>
       <input type="password" name="senha" placeholder="********" class="cadInput" required>
       <span class="cadSpan">Data de Nascimento:</span>
-      <input type="date" name="Data de Nascimento" placeholder="********" class="cadInput" required>
-  		<span class="span">É aluno:</span>
- 		<input type="radio" name="aluno" value="sim" class="radioInput"><span class="radioInput">Sim</span>
- 		<input type="radio" name="aluno" value="nao" class="radioInput" id="rightRadio"><span class="radioInput">Não</span>
- 		<br>
- 		<br>
+      <input type="date" name="dtnasc" class="cadInput" required>
+      <div id = "radioLine">
+    		<span class="span">É aluno:</span>
+     		<input type="radio" name="aluno" value="sim" class="radioInput"><span class="radioInput"> Sim</span>
+     		<input type="radio" name="aluno" value="nao" class="radioInput" id="rightRadio"><span class="radioInput"> Não</span>
+      </div>
   		<div id = "hiddenInput">
   			<span class="cadSpan">Digite seu cpf:</span>
   			<input class="cadInput" type="text" name="cpf" placeholder="123.456.789-00">
   		</div>
     <!--<input type="submit" class="inputButton" value="Enviar">-->
+<<<<<<< HEAD
       <a href="" class="btn btn-block btn-outline-info"> <i class="fab fa-google"></i>   Login via Google</a>
       <a href="" class="btn btn-block btn-outline-primary"> <i class="fab fa-facebook-f"></i>   Login via facebook</a>
       <a href="" class="btn btn-block btn-outline-primary"> <i class="fab fa-facebook-f"></i>   Criar Cadastro</a>
+=======
+      <button type="submit" class="btn btn-outline-primary btn-block sbmbtn" value="Cadastrar">Cadastrar</button>
+      <a href="" class="btn btn-block btn-outline-primary sbmbtn"> <i class="fab fa-google"></i>   Login via Google</a>
+      <a href="" class="btn btn-block btn-outline-primary sbmbtn"> <i class="fab fa-facebook-f"></i>   Login via Facebook</a>
+>>>>>>> 8564cba47cb544cf3476fa51fca7f2156761c21d
     </form>
     <p>
       
