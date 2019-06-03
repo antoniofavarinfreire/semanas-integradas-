@@ -49,27 +49,147 @@
         <h1 class="mt-5">Minicursos</h1>
         <div id="bloco">
           <h6 id="caixa">Minicursos Computação</h6>
-          <p id="info-bloco">lista de minicursos</p>
+          <section class="grid-test">
+            <div class="grid-test-row">
+              <div class="grid-test-col"><a href="#" class="uncolored">Minicurso #1</a></div>
+              <div class="grid-test-col">Palestrante #1</div>
+              <section class="grid-test-col data">00/00/0000</section>
+            </div>
+          </section>
+          <section class="grid-test">
+            <div class="grid-test-row">
+              <div class="grid-test-col">Minicurso #2</div>
+              <div class="grid-test-col">Palestrante #2</div>
+              <div class="grid-test-col data">00/00/0000</div>
+            </div>
+          </section>
+          <section class="grid-test">
+            <div class="grid-test-row">
+              <div class="grid-test-col">Minicurso #3</div>
+              <div class="grid-test-col">Palestrante #3</div>
+              <div class="grid-test-col data">00/00/0000</div>
+            </div>
+          </section>
         </div>
         <div id="bloco">
           <h6 id="caixa">Minicursos Engenharia Elétrica</h6>
-          <p id="info-bloco">lista de minicursos</p>
+          <section class="grid-test">
+            <div class="grid-test-row">
+              <div class="grid-test-col">Minicurso #1</div>
+              <div class="grid-test-col">Palestrante #1</div>
+              <div class="grid-test-col data">00/00/0000</div>
+            </div>
+          </section>
+          <section class="grid-test">
+            <div class="grid-test-row">
+              <div class="grid-test-col">Minicurso #2</div>
+              <div class="grid-test-col">Palestrante #2</div>
+              <div class="grid-test-col data">00/00/0000</div>
+            </div>
+          </section>
+          <section class="grid-test">
+            <div class="grid-test-row">
+              <div class="grid-test-col">Minicurso #3</div>
+              <div class="grid-test-col">Palestrante #3</div>
+              <div class="grid-test-col data">00/00/0000</div>
+            </div>
+          </section>
         </div>
         <div id="bloco">
           <h6 id="caixa">Minicursos Engenharia Mecânica</h6>
-          <p id="info-bloco">lista de minicursos</p>
+          <section class="grid-test">
+            <div class="grid-test-row">
+              <div class="grid-test-col">Minicurso #1</div>
+              <div class="grid-test-col">Palestrante #1</div>
+              <div class="grid-test-col data">00/00/0000</div>
+            </div>
+          </section>
+          <section class="grid-test">
+            <div class="grid-test-row">
+              <div class="grid-test-col">Minicurso #2</div>
+              <div class="grid-test-col">Palestrante #2</div>
+              <div class="grid-test-col data">00/00/0000</div>
+            </div>
+          </section>
+          <section class="grid-test">
+            <div class="grid-test-row">
+              <div class="grid-test-col">Minicurso #3</div>
+              <div class="grid-test-col">Palestrante #3</div>
+              <div class="grid-test-col data">00/00/0000</div>
+            </div>
+          </section>
         </div>
         <div id="bloco">
           <h6 id="caixa">Minicursos Engenharia de Produção</h6>
-          <p id="info-bloco">lista de minicursos</p>
+          <section class="grid-test">
+            <div class="grid-test-row">
+              <div class="grid-test-col">Minicurso #1</div>
+              <div class="grid-test-col">Palestrante #1</div>
+              <div class="grid-test-col data">00/00/0000</div>
+            </div>
+          </section>
+          <section class="grid-test">
+            <div class="grid-test-row">
+              <div class="grid-test-col">Minicurso #2</div>
+              <div class="grid-test-col">Palestrante #2</div>
+              <div class="grid-test-col data">00/00/0000</div>
+            </div>
+          </section>
+          <section class="grid-test">
+            <div class="grid-test-row">
+              <div class="grid-test-col">Minicurso #3</div>
+              <div class="grid-test-col">Palestrante #3</div>
+              <div class="grid-test-col data">00/00/0000</div>
+            </div>
+          </section>
         </div>
         <div id="bloco">
           <h6 id="caixa">Minicursos Engenharia Civil</h6>
-          <p id="info-bloco">lista de minicursos</p>
+          <section class="grid-test">
+            <div class="grid-test-row">
+              <div class="grid-test-col">Minicurso #1</div>
+              <div class="grid-test-col">Palestrante #1</div>
+              <div class="grid-test-col data">00/00/0000</div>
+            </div>
+          </section>
+          <section class="grid-test">
+            <div class="grid-test-row">
+              <div class="grid-test-col">Minicurso #2</div>
+              <div class="grid-test-col">Palestrante #2</div>
+              <div class="grid-test-col data">00/00/0000</div>
+            </div>
+          </section>
+          <section class="grid-test">
+            <div class="grid-test-row">
+              <div class="grid-test-col">Minicurso #3</div>
+              <div class="grid-test-col">Palestrante #3</div>
+              <div class="grid-test-col data">00/00/0000</div>
+            </div>
+          </section>
         </div>
         <div id="bloco">
           <h6 id="caixa">Minicursos Licenciaturas</h6>
-          <p id="info-bloco">lista de minicursos</p>
+          <section class="grid-test">
+            <div class="grid-test-row">
+              <div class="grid-test-col">Minicurso #1</div>
+              <div class="grid-test-col">Palestrante #1</div>
+              <div class="grid-test-col data">00/00/0000</div>
+            </div>
+          </section>
+          <section class="grid-test">
+            <div class="grid-test-row">
+              <div class="grid-test-col">Minicurso #2</div>
+              <div class="grid-test-col">Palestrante #2</div>
+              <div class="grid-test-col data">00/00/0000</div>
+            </div>
+          </section>
+          <section class="grid-test">
+            <div class="grid-test-row">
+              <div class="grid-test-col">Minicurso #3</div>
+              <div class="grid-test-col">Palestrante #3</div>
+              <div class="grid-test-col data">00/00/0000</div>
+            </div>
+          </section>
         </div>
       </div>
     </div>
