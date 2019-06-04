@@ -56,15 +56,9 @@
   			<input class="cadInput" type="text" name="cpf" placeholder="123.456.789-00">
   		</div>
     <!--<input type="submit" class="inputButton" value="Enviar">-->
-<<<<<<< HEAD
-      <a href="" class="btn btn-block btn-outline-info"> <i class="fab fa-google"></i>   Login via Google</a>
-      <a href="" class="btn btn-block btn-outline-primary"> <i class="fab fa-facebook-f"></i>   Login via facebook</a>
-      <a href="" class="btn btn-block btn-outline-primary"> <i class="fab fa-facebook-f"></i>   Criar Cadastro</a>
-=======
       <button type="submit" class="btn btn-outline-primary btn-block sbmbtn" value="Cadastrar">Cadastrar</button>
       <a href="" class="btn btn-block btn-outline-primary sbmbtn"> <i class="fab fa-google"></i>   Login via Google</a>
       <a href="" class="btn btn-block btn-outline-primary sbmbtn"> <i class="fab fa-facebook-f"></i>   Login via Facebook</a>
->>>>>>> 8564cba47cb544cf3476fa51fca7f2156761c21d
     </form>
     <p>
       

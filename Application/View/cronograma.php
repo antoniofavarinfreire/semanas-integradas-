@@ -42,6 +42,7 @@
     </div>
   </nav>
 
+
   <!-- Page Content -->
   <div class="container">
     <div class="row">
@@ -49,7 +50,26 @@
         <h1 class="mt-5">Cronograma</h1>
       </div>
     </div>
+    <div id="bloco">
+      <h6 id="caixa">Computação</h6>
+    </div>
+    <div id="bloco">
+      <h6 id="caixa">Elétrica</h6>
+    </div>
+    <div id="bloco">
+      <h6 id="caixa">Civil</h6>
+    </div>
+    <div id="bloco">
+      <h6 id="caixa">Produção</h6>
+    </div>
+    <div id="bloco">
+      <h6 id="caixa">Licenciaturas</h6>
+    </div>
+    <div id="bloco">
+      <h6 id="caixa">Mecânica</h6>
+    </div>
   </div>
+
 
   <?php 
     include 'bottom.php';
