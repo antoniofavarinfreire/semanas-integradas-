@@ -3,8 +3,7 @@
 	include 'header.php';
 	session_start();
   if (!isset($_SESSION['id'])){
-    $_SESSION['message'] = 'Vaza daqui loco
-    Ce nao manda em mim, bem feito';
+    $_SESSION['message'] = 'Vaza daqui loco';
     header("Location:index.php");
   }
 
