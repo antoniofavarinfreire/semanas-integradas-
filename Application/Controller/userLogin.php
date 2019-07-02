@@ -8,8 +8,8 @@ $al->register();
 // App loader
 require_once '../../Lib/SGE/Core/AppLoader.php';
 $al= new SGE\Core\AppLoader;
-$al->addDirectory('App/Control');
-$al->addDirectory('App/Model');
+$al->addDirectory('Application/Control');
+$al->addDirectory('Application/Model');
 $al->register();
 
 
@@ -21,8 +21,8 @@ class userLogin {
         if(isset($data)){
 
             if($data['email']!=''&&$data['password']!=''){
-                $Login = new Login;
-                $userId = $Login->Login($data);
+                $User = new User;
+                $userId = $User->Login($data);
                 if(isset($userId)){
                     return $userId;
 

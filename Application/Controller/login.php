@@ -11,8 +11,8 @@ $al->register();
 // App loader
 require_once '../../Lib/SGE/Core/AppLoader.php';
 $al= new SGE\Core\AppLoader;
-$al->addDirectory('App/Control');
-$al->addDirectory('App/Model');
+$al->addDirectory('Application/Control');
+$al->addDirectory('Application/Model');
 $al->register();
 
 use SGE\Session\Session;
@@ -23,7 +23,7 @@ if (Session::getValue('logged')) {
     #logado
 }
 else {
-    require_once 'Login.php';
+    require_once 'userLogin.php';
     if(isset($_POST)){
         $data = $_POST;
         $userLogin =  new userLogin;
