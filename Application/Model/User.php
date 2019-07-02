@@ -1,4 +1,5 @@
 <?php
+
 use SGE\Database\Connection;
 
 class User{
