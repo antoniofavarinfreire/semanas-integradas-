@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+    <timage id="0">
+        <class>TImage</class>
+        <name>image1</name>
+        <x>130</x>
+        <y>-10</y>
+        <image>app/images/titulo.png</image>
+        <path>app/images/titulo.png</path>
+    </timage>
+    <tlabel id="1">
+        <class>TLabel</class>
+        <name>label1</name>
+        <x>20</x>
+        <y>150</y>
+        <color>#000000</color>
+        <size>10</size>
+        <style>b</style>
+        <value>DATA</value>
+    </tlabel>
+    <tlabel id="2">
+        <class>TLabel</class>
+        <name>label2</name>
+        <x>100</x>
+        <y>85</y>
+        <color>#000000</color>
+        <size>10</size>
+        <style>b</style>
+        <value>INEP</value>
+    </tlabel>
+    <tlabel id="3">
+        <class>TLabel</class>
+        <name>label3</name>
+        <x>175</x>
+        <y>150</y>
+        <color>#000000</color>
+        <size>10</size>
+        <style>b</style>
+        <value>OBSERVAÇÕES</value>
+    </tlabel>
+    <tlabel id="4">
+        <class>TLabel</class>
+        <name>label8</name>
+        <x>20</x>
+        <y>380</y>
+        <color>#000000</color>
+        <size>10</size>
+        <style>b</style>
+        <value>DETALHES DO SERVIÇO</value>
+    </tlabel>
+    <tentry id="5">
+        <class>TEntry</class>
+        <name>nomeinstituicao</name>
+        <x>230</x>
+        <y>105</y>
+        <value></value>
+        <mask></mask>
+        <width>539</width>
+        <maxlen>0</maxlen>
+        <editable>1</editable>
+        <tip></tip>
+        <required></required>
+    </tentry>
+    <tdate id="6">
+        <class>TDate</class>
+        <name>dataservico</name>
+        <x>15</x>
+        <y>170</y>
+        <value></value>
+        <mask></mask>
+        <width>123</width>
+        <editable>1</editable>
+        <tip></tip>
+        <required></required>
+    </tdate>
+    <tentry id="7">
+        <class>TEntry</class>
+        <name>observacoes</name>
+        <x>170</x>
+        <y>170</y>
+        <value></value>
+        <mask></mask>
+        <width>518</width>
+        <maxlen>0</maxlen>
+        <editable>1</editable>
+        <tip></tip>
+        <required></required>
+    </tentry>
+    <tframe id="8">
+        <class>TFrame</class>
+        <name>frame1</name>
+        <title>   TÉCNICOS QUE EXECUTARAM O SERVIÇO   </title>
+        <x>10</x>
+        <y>220</y>
+        <width>340</width>
+        <height>119</height>
+        <child>
+            <tpanel>
+                <tcheckgroup id="0">
+                    <class>TCheckGroup</class>
+                    <name>rd_adriano</name>
+                    <items>1: ADRIANO </items>
+                    <x>5</x>
+                    <y>5</y>
+                    <tip></tip>
+                </tcheckgroup>
+                <tcheckgroup id="1">
+                    <class>TCheckGroup</class>
+                    <name>rd_danilo</name>
+                    <items>1: DANILO </items>
+                    <x>5</x>
+                    <y>65</y>
+                    <tip></tip>
+                </tcheckgroup>
+                <tcheckgroup id="2">
+                    <class>TCheckGroup</class>
+                    <name>rd_herlan</name>
+                    <items>1: HERLAN</items>
+                    <x>105</x>
+                    <y>5</y>
+                    <tip></tip>
+                </tcheckgroup>
+                <tcheckgroup id="3">
+                    <class>TCheckGroup</class>
+                    <name>rd_uelque</name>
+                    <items>1: UELQUE</items>
+                    <x>225</x>
+                    <y>5</y>
+                    <tip></tip>
+                </tcheckgroup>
+                <tcheckgroup id="4">
+                    <class>TCheckGroup</class>
+                    <name>rd_benilson</name>
+                    <items>1: BENILSON</items>
+                    <x>5</x>
+                    <y>35</y>
+                    <tip></tip>
+                </tcheckgroup>
+                <tcheckgroup id="5">
+                    <class>TCheckGroup</class>
+                    <name>rd_wathson</name>
+                    <items>1: WATHSON</items>
+                    <x>225</x>
+                    <y>35</y>
+                    <tip></tip>
+                </tcheckgroup>
+                <tcheckgroup id="6">
+                    <class>TCheckGroup</class>
+                    <name>rd_izaque</name>
+                    <items>1: IZAQUE</items>
+                    <x>105</x>
+                    <y>35</y>
+                    <tip></tip>
+                </tcheckgroup>
+                <tcheckgroup id="7">
+                    <class>TCheckGroup</class>
+                    <name>rd_jonnathan</name>
+                    <items>1: JOHNNATHAN</items>
+                    <x>105</x>
+                    <y>65</y>
+                    <tip></tip>
+                </tcheckgroup>
+            </tpanel>
+        </child>
+    </tframe>
+    <tframe id="9">
+        <class>TFrame</class>
+        <name>frame2</name>
+        <title>   SERVIÇOS EXECUTADOS   </title>
+        <x>370</x>
+        <y>220</y>
+        <width>400</width>
+        <height>120</height>
+        <child>
+            <tpanel>
+                <tcheckgroup id="0">
+                    <class>TCheckGroup</class>
+                    <name>rd_virus</name>
+                    <items>1: VÍRUS </items>
+                    <x>5</x>
+                    <y>5</y>
+                    <tip></tip>
+                </tcheckgroup>
+                <tcheckgroup id="1">
+                    <class>TCheckGroup</class>
+                    <name>rd_sistema</name>
+                    <items>1: SISTEMA OPERACIONAL</items>
+                    <x>90</x>
+                    <y>5</y>
+                    <tip></tip>
+                </tcheckgroup>
+                <tcheckgroup id="2">
+                    <class>TCheckGroup</class>
+                    <name>rd_software</name>
+                    <items>1: SOFTWARE</items>
+                    <x>285</x>
+                    <y>5</y>
+                    <tip></tip>
+                </tcheckgroup>
+                <tcheckgroup id="3">
+                    <class>TCheckGroup</class>
+                    <name>rd_rede</name>
+                    <items>1: REDE</items>
+                    <x>5</x>
+                    <y>35</y>
+                    <tip></tip>
+                </tcheckgroup>
+                <tcheckgroup id="4">
+                    <class>TCheckGroup</class>
+                    <name>rd_impressoras</name>
+                    <items>1: IMPRESSORAS</items>
+                    <x>90</x>
+                    <y>35</y>
+                    <tip></tip>
+                </tcheckgroup>
+                <tcheckgroup id="5">
+                    <class>TCheckGroup</class>
+                    <name>rd_internet</name>
+                    <items>1: INTERNET</items>
+                    <x>285</x>
+                    <y>35</y>
+                    <tip></tip>
+                </tcheckgroup>
+                <tcheckgroup id="6">
+                    <class>TCheckGroup</class>
+                    <name>rd_equipamentos</name>
+                    <items>1: EQUIPAMENTOS (HARDWARE)</items>
+                    <x>5</x>
+                    <y>65</y>
+                    <tip></tip>
+                </tcheckgroup>
+                <tcheckgroup id="7">
+                    <class>TCheckGroup</class>
+                    <name>rd_outros</name>
+                    <items>1: OUTROS</items>
+                    <x>285</x>
+                    <y>65</y>
+                    <tip></tip>
+                </tcheckgroup>
+            </tpanel>
+        </child>
+    </tframe>
+    <ttext id="10">
+        <class>TText</class>
+        <name>detalhes</name>
+        <x>15</x>
+        <y>410</y>
+        <value></value>
+        <width>760</width>
+        <height>100</height>
+        <tip></tip>
+        <required></required>
+    </ttext>
+    <tlabel id="11">
+        <class>TLabel</class>
+        <name>label9</name>
+        <x>235</x>
+        <y>85</y>
+        <color>#000000</color>
+        <size>10</size>
+        <style>b</style>
+        <value>NOME DA INSTITUIÇÃO</value>
+    </tlabel>
+    <tbutton id="12">
+        <class>TButton</class>
+        <name>button1</name>
+        <x>175</x>
+        <y>540</y>
+        <value>Salvar</value>
+        <icon>ico_save.png</icon>
+        <action>salvar_dados</action>
+        <template>save.php</template>
+    </tbutton>
+    <tbutton id="13">
+        <class>TButton</class>
+        <name>button2</name>
+        <x>20</x>
+        <y>540</y>
+        <value>Novo</value>
+        <icon>ico_new.png</icon>
+        <action>novo</action>
+        <template>reload.php</template>
+    </tbutton>
+    <tlabel id="14">
+        <class>TLabel</class>
+        <name>lbseek</name>
+        <x>90</x>
+        <y>105</y>
+        <color>#000000</color>
+        <size>10</size>
+        <style></style>
+        <value> </value>
+    </tlabel>
+    <tlabel id="15">
+        <class>TLabel</class>
+        <name>lb_id</name>
+        <x>30</x>
+        <y>85</y>
+        <color>#000000</color>
+        <size>10</size>
+        <style>b</style>
+        <value>ID</value>
+    </tlabel>
+    <tentry id="16">
+        <class>TEntry</class>
+        <name>id</name>
+        <x>15</x>
+        <y>105</y>
+        <value></value>
+        <mask></mask>
+        <width>50</width>
+        <maxlen>0</maxlen>
+        <editable>0</editable>
+        <tip></tip>
+        <required></required>
+    </tentry>
+    <tlabel id="17">
+        <class>TLabel</class>
+        <name>lb_listar</name>
+        <x>95</x>
+        <y>540</y>
+        <color>#000000</color>
+        <size>10</size>
+        <style></style>
+        <value></value>
+    </tlabel>
+    <tbutton id="18">
+        <class>TButton</class>
+        <name>button3</name>
+        <x>715</x>
+        <y>535</y>
+        <value>Excluir</value>
+        <icon>ico_delete.png</icon>
+        <action>deletar</action>
+        <template>delete.php</template>
+    </tbutton>
+    <tbutton id="19">
+        <class>TButton</class>
+        <name>button4</name>
+        <x>255</x>
+        <y>540</y>
+        <value>Imprimir Ficha</value>
+        <icon>ico_print.png</icon>
+        <action>imprimeFicha</action>
+        <template></template>
+    </tbutton>
+    <tbutton id="20">
+        <class>TButton</class>
+        <name>bt_hora</name>
+        <x>705</x>
+        <y>170</y>
+        <value>Hora</value>
+        <icon>ico_question.png</icon>
+        <action>hora_atual</action>
+        <template></template>
+    </tbutton>
+</form>

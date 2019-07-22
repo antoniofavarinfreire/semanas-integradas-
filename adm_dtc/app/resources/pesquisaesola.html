@@ -1,0 +1,41 @@
+<!--[main]-->
+<div class="tform">
+    <table style="width:640px">
+        <tr class="tformtitle">
+            <td colspan="2"> <label> Escolas </label> </td>
+        </tr>
+        <tbody class="formdata">
+
+            <tr class="">
+                <td style="font-weight:bold"  align="right">ID</td>
+                <td style="padding-left:10px" align="left">{$id}</td>
+            </tr>
+
+            <tr class="oddrow">
+                <td style="font-weight:bold"  align="right">INEP</td>
+                <td style="padding-left:10px" align="left">{$inep}</td>
+            </tr>
+
+            <tr class="">
+                <td style="font-weight:bold"  align="right">NOME</td>
+                <td style="padding-left:10px" align="left">{$nome}</td>
+            </tr>
+
+            <tr class="oddrow">
+                <td style="font-weight:bold"  align="right">CATEGORIA</td>
+                <td style="padding-left:10px" align="left">{$categoria}</td>
+            </tr>
+
+
+            <tr class="tformaction">
+                <td colspan="2" align="right">
+                    <a generator="adianti" href="index.php?class=EscolasForm&method=onEdit&id={$id}&key={$id}" class="btn btn-default">
+                        <span class="fa fa-pencil-square-o"></span>
+                        Edit
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<!--[/main]-->
