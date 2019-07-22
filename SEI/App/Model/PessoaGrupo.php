@@ -3,5 +3,5 @@ use Livro\Database\Record;
 
 class PessoaGrupo extends Record
 {
-    const TABLENAME = 'pessoa_grupo';
+    const TABLENAME = 'pessoa_has_grupo';
 }

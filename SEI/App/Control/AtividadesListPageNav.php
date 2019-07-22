@@ -34,12 +34,12 @@ class AtividadesListPageNav extends Page
         parent::__construct();
         // instancia um formulário
         $this->form = new FormWrapper(new Form('form_busca_atividaes'));
-        $this->form->setTitle('Atividades');
+        $this->form->setTitle('Eventos');
         
         // cria os campos do formulário
-        $titulo = new Entry('titulo');
+        $titulo = new Entry('nome');
         
-        $this->form->addField('Titulo', $titulo, 300);
+        $this->form->addField('Nome', $titulo, 300);
         $this->form->addAction('Buscar', new Action(array($this, 'onReload')));
         $this->form->addAction('Novo', new Action(array(new AtividadesForm, 'onEdit')));
         
@@ -48,7 +48,7 @@ class AtividadesListPageNav extends Page
 
         // instancia as colunas da Datagrid
         $codigo   = new DatagridColumn('id',         'Código', 'right', 50);
-        $titulo     = new DatagridColumn('titulo',       'Titulo',    'left', 200);
+        $titulo     = new DatagridColumn('nome',       'Nome',    'left', 200);
         $sala = new DatagridColumn('sala',   'Sala','left', 200);
         
     
@@ -90,10 +90,10 @@ class AtividadesListPageNav extends Page
         $criteria = new Criteria;
         
         // verifica se o usuário preencheu o formulário
-        if ($dados->titulo)
+        if ($dados->nome)
         {
             // filtra pelo nome do atividade
-            $criteria->add('titulo', 'like', "%{$dados->titulo}%");
+            $criteria->add('nome', 'like', "%{$dados->nome}%");
         }
 
         // carrega os produtos que satisfazem o critério
@@ -146,7 +146,7 @@ class AtividadesListPageNav extends Page
             $cidade = new Atividade($key); // instancia objeto Cidade
             $cidade->delete(); // deleta objeto do banco de dados
             Transaction::close(); // finaliza a transação
-            $this->onReload(); // recarrega a datagrid
+            $this->onReload('nome'); // recarrega a datagrid
             new Message('info', "Registro excluído com sucesso");
         }
         catch (Exception $e)

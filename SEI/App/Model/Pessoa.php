@@ -2,12 +2,37 @@
 use Livro\Database\Record;
 use Livro\Database\Criteria;
 use Livro\Database\Repository;
+use Livro\Database\Transaction;
 
 class Pessoa extends Record
 {
     const TABLENAME = 'pessoa';
+    // @param [$cpf] cpf do da pessoa Description
+    public static function find2($cpf)
+    {
+        Transaction::open('sei');
+        $aux = Transaction::get();
+        $sql = "SELECT * FROM pessoa WHERE cpf=$cpf";
+        Transaction::log($sql);
+        $result = $aux->query($sql);
+        if($result){
+            return $result->fetchObject(__CLASS__);
+        }
+    }
+
+    public static function delete2($cpf)
+    {
+        Transaction::open('sei');
+        $aux = Transaction::get();
+        $sql = "DELETE FROM pessoa_has_grupo WHERE pessoa_cpf=$cpf";
+        Transaction::log($sql);
+        $result = $aux->exec($sql);
+        $sql = "DELETE FROM pessoa WHERE cpf=$cpf";
+        Transaction::log($sql);
+        $result = $aux->exec($sql);
+        return $result;
+    }
     /* private $cidade; */
-    
     /**
      * Retorna a cidade.
      * Executado sempre se for acessada a propriedade "->cidade"
@@ -38,8 +63,8 @@ class Pessoa extends Record
     public function addGrupo(Grupo $grupo)
     {
         $pg = new PessoaGrupo;
-        $pg->id_grupo = $grupo->id;
-        $pg->id_pessoa = $this->id;
+        $pg->grupo_id = $grupo->id;
+        $pg->pessoa_cpf = $this->cpf;
         $pg->store();
     }
     
@@ -49,7 +74,7 @@ class Pessoa extends Record
     public function delGrupos()
     {
 	    $criteria = new Criteria;
-	    $criteria->add('id_pessoa', '=', $this->id);
+	    $criteria->add('pessoa_cpf', '=', $this->cpf);
 	    
 	    $repo = new Repository('PessoaGrupo');
 	    return $repo->delete($criteria);
@@ -62,13 +87,13 @@ class Pessoa extends Record
     {
         $grupos = array();
 	    $criteria = new Criteria;
-	    $criteria->add('id_pessoa', '=', $this->id);
+	    $criteria->add('pessoa_cpf', '=', $this->cpf);
 	    
 	    $repo = new Repository('PessoaGrupo');
 	    $vinculos = $repo->load($criteria);
 	    if ($vinculos) {
 	        foreach ($vinculos as $vinculo) {
-	            $grupos[] = new Grupo($vinculo->id_grupo);
+	            $grupos[] = new Grupo($vinculo->grupo_id);
 	        }
 	    }
 	    return $grupos;

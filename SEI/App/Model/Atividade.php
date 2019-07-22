@@ -5,7 +5,7 @@ use Livro\Database\Repository;
 
 class Atividade extends Record
 {
-    const TABLENAME = 'atividade';
+    const TABLENAME = 'evento';
     /* private $cidade; */
     
     /**
@@ -38,8 +38,8 @@ class Atividade extends Record
     public function addTipo(Tipo $tipo)
     {
         $pg = new AtividadeTipo;
-        $pg->id_tipo = $tipo->id;
-        $pg->id_atividade = $this->id;
+        $pg->tipo_id = $tipo->id;
+        $pg->evento_id = $this->id;
         $pg->store();
     }
     
@@ -49,7 +49,7 @@ class Atividade extends Record
     public function delTipos()
     {
 	    $criteria = new Criteria;
-	    $criteria->add('id_atividade', '=', $this->id);
+	    $criteria->add('evento_id', '=', $this->id);
 	    
 	    $repo = new Repository('AtividadeTipo');
 	    return $repo->delete($criteria);
@@ -62,7 +62,7 @@ class Atividade extends Record
     {
         $tipos = array();
 	    $criteria = new Criteria;
-	    $criteria->add('id_atividade', '=', $this->id);
+	    $criteria->add('evento_id', '=', $this->id);
 	    
 	    $repo = new Repository('AtividadeTipo');
 	    $vinculos = $repo->load($criteria);

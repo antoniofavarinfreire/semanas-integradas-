@@ -55,8 +55,8 @@ class PessoasList extends Page
         $this->datagrid->addColumn($email);
         
 
-        $this->datagrid->addAction( 'Editar',  new Action([new PessoasForm, 'onEdit']), 'id', 'fa fa-edit fa-lg blue');
-        $this->datagrid->addAction( 'Excluir',  new Action([$this, 'onDelete']),         'id', 'fa fa-trash fa-lg red');
+        $this->datagrid->addAction( 'Editar',  new Action([new PessoasForm, 'onEdit']), 'cpf', 'fa fa-edit fa-lg blue');
+        $this->datagrid->addAction( 'Excluir',  new Action([$this, 'onDelete']),         'cpf', 'fa fa-trash fa-lg red');
         
         // monta a página através de uma caixa
         $box = new VBox;
@@ -126,9 +126,9 @@ class PessoasList extends Page
         try
         {
             $cpf = $param['cpf']; // obtém a chave
-            Transaction::open('livro'); // inicia transação com o banco 'livro'
-            $pessoa = Pessoa::find($cpf);
-            $pessoa->delete(); // deleta objeto do banco de dados
+            Transaction::open('sei'); // inicia transação com o banco 'livro'
+            $pessoa = Pessoa::find2($cpf);
+            $pessoa->delete2($cpf); // deleta objeto do banco de dados
             Transaction::close(); // finaliza a transação
             $this->onReload(); // recarrega a datagrid
             new Message('info', "Registro excluído com sucesso");

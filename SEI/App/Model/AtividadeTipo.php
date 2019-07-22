@@ -3,5 +3,5 @@ use Livro\Database\Record;
 
 class AtividadeTipo extends Record
 {
-    const TABLENAME = 'atividade_tipo';
+    const TABLENAME = 'evento_has_tipo';
 }

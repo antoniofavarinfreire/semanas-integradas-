@@ -33,10 +33,10 @@ class AtividadesList extends Page
         
         // instancia um formulário de buscas
         $this->form = new FormWrapper(new Form('form_busca_atividades'));
-        $this->form->setTitle('Atividades');
+        $this->form->setTitle('Eventos');
         
-        $titulo = new Entry('Titulo');
-        $this->form->addField('Titulo', $titulo, '100%');
+        $titulo = new Entry('nome');
+        $this->form->addField('Nome', $titulo, '100%');
         $this->form->addAction('Buscar', new Action(array($this, 'onReload')));
         $this->form->addAction('Novo', new Action(array(new AtividadesForm, 'onEdit')));
         
@@ -44,10 +44,9 @@ class AtividadesList extends Page
         $this->datagrid = new DatagridWrapper(new Datagrid);
 
         // instancia as colunas da Datagrid
-        $titulo   = new DatagridColumn('titulo',         'Titulo', 'center', '40%');
+        $titulo   = new DatagridColumn('nome',         'nome', 'center', '40%');
         $sala     = new DatagridColumn('sala',       'Sala',    'left', '20%');
-        $horario = new DatagridColumn('hora_i',   'Horario','left', '20%');
-        
+        $horario = new DatagridColumn('inicio',   'Horario','left', '20%');
         
 
         // adiciona as colunas à Datagrid
@@ -75,20 +74,20 @@ class AtividadesList extends Page
     public function onReload()
     {
         Transaction::open('sei'); // inicia transação com o BD
-        $repository = new Repository('Atividade');
+        $repository = new Repository('evento');
 
         // cria um critério de seleção de dados
         $criteria = new Criteria;
-        $criteria->setProperty('order', 'titulo');
+        $criteria->setProperty('order', 'nome');
 
         // obtém os dados do formulário de buscas
         $dados = $this->form->getData();
 
         // verifica se o usuário preencheu o formulário
-        if ($dados->Titulo)
+        if ($dados->nome)
         {
             // filtra pelo nome do atividade
-            $criteria->add('titulo', 'like', "%{$dados->titulo}%");
+            $criteria->add('nome', 'like', "%{$dados->nome}%");
         }
 
         // carrega os produtos que satisfazem o critério
@@ -113,9 +112,9 @@ class AtividadesList extends Page
      */
     public function onDelete($param)
     {
-        $titulo = $param['titulo']; // obtém o parâmetro $id
+        $titulo = $param['nome']; // obtém o parâmetro $id
         $action1 = new Action(array($this, 'Delete'));
-        $action1->setParameter('titulo', $titulo);
+        $action1->setParameter('nome', $titulo);
         
         new Question('Deseja realmente excluir o registro?', $action1);
     }
@@ -127,7 +126,7 @@ class AtividadesList extends Page
     {
         try
         {
-            $titulo = $param['titulo']; // obtém a chave
+            $titulo = $param['nome']; // obtém a chave
             Transaction::open('livro'); // inicia transação com o banco 'livro'
             $atividade = Atividade::find($titulo);
             $atividade->delete(); // deleta objeto do banco de dados

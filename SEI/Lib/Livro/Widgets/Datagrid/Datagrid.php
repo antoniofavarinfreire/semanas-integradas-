@@ -33,12 +33,6 @@ class Datagrid
     {
         $this->actions[] = ['label' => $label, 'action'=> $action, 'field' => $field, 'image' => $image];
     }
-    public function enablePopover($title, $content)
-    {
-        $this->popover = TRUE;
-        $this->poptitle = $title;
-        $this->popcontent = $content;
-    }
     
     /**
      * Adiciona um objeto na grid

@@ -30,15 +30,15 @@ class AtividadesForm extends Page
         
         // cria os campos do formulário
         $id        = new Entry('id');
-        $titulo      = new Entry('titulo');
+        $titulo      = new Entry('nome');
         $descricao      = new Entry('descricao');
         $palestrante        = new Entry('palestrante');
-        $minicurriculo          =  new Entry('minicurriculo');
+        $minicurriculo          =  new Entry('mini');
         $sala                       = new Entry('sala');
 
-        $hora_i           = new Entry('hora_i');
-        $hora_f           = new Entry('hora_f');
-        $cargahoraria           = new Entry('cargahoraria');
+        $hora_i           = new Entry('inico');
+        $hora_f           = new Entry('fim');
+        $cargahoraria           = new Entry('duracao');
         
         $tipo     = new CheckGroup('ids_tipo');
         $tipo->setLayout('horizontal');
@@ -54,7 +54,7 @@ class AtividadesForm extends Page
         $tipo->addItems($items);
         Transaction::close();
         
-        $this->form->addField('Titulo', $titulo, '30%');
+        $this->form->addField('Nome', $titulo, '30%');
         $this->form->addField('Descrição', $descricao, '70%');
         $this->form->addField('Palestrante', $palestrante, '70%');
         $this->form->addField('Mini Curriculo', $minicurriculo, '70%');
@@ -62,7 +62,7 @@ class AtividadesForm extends Page
         $this->form->addField('Sala', $sala, '20%');
         $this->form->addField('Hora de Inicio', $hora_i, '30%');
         $this->form->addField('Hora de Fim', $hora_f, '30%');
-        
+        //add dia das atividades
         
         $this->form->addField('Tipo', $tipo, '70%');
         

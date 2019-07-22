@@ -10,6 +10,7 @@ use Livro\Widgets\Form\CheckGroup;
 use Livro\Database\Transaction;
 use Livro\Widgets\Container\Panel;
 use Livro\Widgets\Wrapper\FormWrapper;
+use Livro\Widgets\Form\Date;
 
 /**
  * Formulário de pessoas
@@ -32,13 +33,13 @@ class PessoasForm extends Page
         $id        = new Entry('id');
         $cpf       = new Entry('cpf');
         $nome      = new Entry('nome');
-        $telefone  = new Entry('telefone');
         $email     = new Entry('email');
-        $password     = new password('password');
+        $nasc   = new Date('nascimento');
+        $password     = new password('senha');
         $password_check     = new password('password_check');
         $grupo     = new CheckGroup('ids_grupos');
         $grupo->setLayout('horizontal');
-        
+        $image = new Entry('imagem_nome');
         
         Transaction::open('sei');
         
@@ -52,8 +53,8 @@ class PessoasForm extends Page
         
         $this->form->addField('CPF', $cpf, '30%');
         $this->form->addField('Nome', $nome, '70%');
-        $this->form->addField('Telefone', $telefone, '70%');
         $this->form->addField('Email', $email, '70%');
+        $this->form->addField('Nascimento',$nasc,'50%');
         $this->form->addField('Insira uma senha', $password, '50%');
         $this->form->addField('Confirme sua senha', $password_check, '50%');
 
@@ -79,16 +80,23 @@ class PessoasForm extends Page
             Transaction::open('sei');
 
             $dados = $this->form->getData();
-            $pass = $this->password($dados->password,$dados->password_check);
+            $pass = $this->password($dados->senha,$dados->password_check);
             if(isset($pass)){
                 unset($dados->password_check);
-                $dados->password = $pass;
+                $dados->senha = $pass;
             }
-
-
+            /****************teste de insercao de imagem************/
+            $imagem = new Imagem;
+            $imagem->nome = $dados->cpf;
+            $imagem->nome .=".png";
+            $imagem->endereco = "shiet";
+            $imagem->tipo = "0";
+            $imagem->store();
+            /*********************/
             $this->form->setData($dados);
             $pessoa = new Pessoa; // instancia objeto
             $pessoa->fromArray( (array) $dados); // carrega os dados
+            $pessoa->imagem_nome = $imagem->nome;
             $pessoa->store(); // armazena o objeto no banco de dados
             
             $pessoa->delGrupos();
@@ -119,14 +127,15 @@ class PessoasForm extends Page
     {
         try
         {
-            if (isset($param['id']))
+            if (isset($param['cpf']))
             {
-                $id = $param['id']; // obtém a chave
+                $id = $param['cpf']; // obtém a chave
                 Transaction::open('sei'); // inicia transação com o BD
-                $pessoa = Pessoa::find($id);
+                $pessoa = Pessoa::find2($id);
+                //echo $pessoa->cpf;
                 if ($pessoa)
                 {   
-                    unset($pessoa->password);
+                    unset($pessoa->senha);
                     $pessoa->ids_grupos = $pessoa->getIdsGrupos();
                     $this->form->setData($pessoa); // lança os dados da pessoa no formulário
                 }

@@ -10,7 +10,7 @@ use Livro\Widgets\Base\Element;
 class Password extends Field implements FormElementInterface
 {
     protected $properties;
-    
+
     /**
      * Exibe o widget na tela
      */
@@ -24,6 +24,7 @@ class Password extends Field implements FormElementInterface
         $tag->type = 'password';          // tipo do input
         $tag->style = "width:{$this->size}"; // tamanho em pixels
         
+
         // se o campo não é editável
         if (!parent::getEditable())
         {
