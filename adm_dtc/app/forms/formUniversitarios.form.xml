@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+    <tnotebook id="0">
+        <class>TNotebook</class>
+        <name></name>
+        <x>30</x>
+        <y>20</y>
+        <width>800</width>
+        <height>714</height>
+        <pages>
+            <tpanel id="1" tab="Cadastro">
+                <tlabel id="0">
+                    <class>TLabel</class>
+                    <name>lbcarteira</name>
+                    <x>20</x>
+                    <y>45</y>
+                    <color>#000000</color>
+                    <size>12</size>
+                    <style>b</style>
+                    <value>Nº da Carteira</value>
+                </tlabel>
+                <tlabel id="1">
+                    <class>TLabel</class>
+                    <name>label2</name>
+                    <x>205</x>
+                    <y>45</y>
+                    <color>#000000</color>
+                    <size>12</size>
+                    <style>b</style>
+                    <value>Nome</value>
+                </tlabel>
+                <tlabel id="2">
+                    <class>TLabel</class>
+                    <name>label3</name>
+                    <x>210</x>
+                    <y>105</y>
+                    <color>#000000</color>
+                    <size>12</size>
+                    <style>b</style>
+                    <value>Curso</value>
+                </tlabel>
+                <tlabel id="3">
+                    <class>TLabel</class>
+                    <name>label4</name>
+                    <x>20</x>
+                    <y>105</y>
+                    <color>#000000</color>
+                    <size>12</size>
+                    <style>b</style>
+                    <value>Universidade</value>
+                </tlabel>
+                <tlabel id="4">
+                    <class>TLabel</class>
+                    <name>label5</name>
+                    <x>20</x>
+                    <y>170</y>
+                    <color>#000000</color>
+                    <size>12</size>
+                    <style>b</style>
+                    <value>Telefone 1º</value>
+                </tlabel>
+                <tlabel id="5">
+                    <class>TLabel</class>
+                    <name>label6</name>
+                    <x>210</x>
+                    <y>175</y>
+                    <color>#000000</color>
+                    <size>12</size>
+                    <style>b</style>
+                    <value>Telefone 2º</value>
+                </tlabel>
+                <tlabel id="6">
+                    <class>TLabel</class>
+                    <name>label7</name>
+                    <x>20</x>
+                    <y>225</y>
+                    <color>#000000</color>
+                    <size>12</size>
+                    <style>b</style>
+                    <value>Dias da Semana</value>
+                </tlabel>
+                <tcheckgroup id="7">
+                    <class>TCheckGroup</class>
+                    <name>checkgroup1</name>
+                    <items>1:Segunda-Feira
+</items>
+                    <x>30</x>
+                    <y>260</y>
+                    <tip></tip>
+                </tcheckgroup>
+                <tlabel id="8">
+                    <class>TLabel</class>
+                    <name>label8</name>
+                    <x>238</x>
+                    <y>281</y>
+                    <color>#000000</color>
+                    <size>12</size>
+                    <style>b</style>
+                    <value></value>
+                </tlabel>
+                <tcheckgroup id="9">
+                    <class>TCheckGroup</class>
+                    <name>checkgroup6</name>
+                    <items>1:Terça-Feira
+</items>
+                    <x>150</x>
+                    <y>260</y>
+                    <tip></tip>
+                    <value>1</value>
+                </tcheckgroup>
+                <tcheckgroup id="10">
+                    <class>TCheckGroup</class>
+                    <name>checkgroup7</name>
+                    <items>1:Quarta-Feira
+</items>
+                    <x>270</x>
+                    <y>260</y>
+                    <tip></tip>
+                    <value>1</value>
+                </tcheckgroup>
+                <tcheckgroup id="11">
+                    <class>TCheckGroup</class>
+                    <name>checkgroup8</name>
+                    <items>1:Sexta-Feira
+</items>
+                    <x>510</x>
+                    <y>260</y>
+                    <tip></tip>
+                </tcheckgroup>
+                <tcheckgroup id="12">
+                    <class>TCheckGroup</class>
+                    <name>checkgroup9</name>
+                    <items>1:Quinta-Feira
+</items>
+                    <x>390</x>
+                    <y>260</y>
+                    <tip></tip>
+                    <value>1</value>
+                </tcheckgroup>
+                <tcheckgroup id="13">
+                    <class>TCheckGroup</class>
+                    <name>checkgroup10</name>
+                    <items>1:Sábado
+</items>
+                    <x>630</x>
+                    <y>260</y>
+                    <tip></tip>
+                    <value>1</value>
+                </tcheckgroup>
+                <ttext id="14">
+                    <class>TText</class>
+                    <name>text1</name>
+                    <x>20</x>
+                    <y>305</y>
+                    <value></value>
+                    <width>700</width>
+                    <height>150</height>
+                    <tip></tip>
+                    <required></required>
+                </ttext>
+                <tlabel id="15">
+                    <class>TLabel</class>
+                    <name>label41</name>
+                    <x>20</x>
+                    <y>525</y>
+                    <color>#000000</color>
+                    <size>12</size>
+                    <style>b</style>
+                    <value>Em Espera:</value>
+                </tlabel>
+                <tradiogroup id="16">
+                    <class>TRadioGroup</class>
+                    <name>radiogroup1</name>
+                    <items>0:Não
+1:Sim</items>
+                    <x>125</x>
+                    <y>525</y>
+                    <tip></tip>
+                    <value>1</value>
+                </tradiogroup>
+                <tbutton id="17">
+                    <class>TButton</class>
+                    <name>btnovo</name>
+                    <x>20</x>
+                    <y>590</y>
+                    <value> Novo </value>
+                    <icon>ico_add.png</icon>
+                    <action></action>
+                    <template></template>
+                </tbutton>
+                <tbutton id="18">
+                    <class>TButton</class>
+                    <name>bt_salvar</name>
+                    <x>105</x>
+                    <y>590</y>
+                    <value> Salvar </value>
+                    <icon>ico_save.png</icon>
+                    <action></action>
+                    <template></template>
+                </tbutton>
+            </tpanel>
+        </pages>
+    </tnotebook>
+</form>
