@@ -2,10 +2,51 @@
 use Livro\Database\Record;
 use Livro\Database\Criteria;
 use Livro\Database\Repository;
+use Livro\Database\Transaction;
 
 class Evento extends Record
 {
     const TABLENAME = 'evento';
+
+    public static function getlike($str){
+
+        Transaction::open('sei');
+        $aux = Transaction::get();
+        $sql = "SELECT * FROM evento WHERE nome LIKE '%$str%'";
+        Transaction::log($sql);
+        $result = $aux->query($sql);
+        if($result){
+            return $result->fetchObject(__CLASS__);
+        }
+
+    }
+
+    public static function last(){
+        Transaction::open('sei');
+        $aux = Transaction::get();
+        $sql = "SELECT * FROM evento ORDER BY id DESC LIMIT 1";
+        Transaction::log($sql);
+        $result = $aux->query($sql);
+        if($result){
+            return $result->fetchObject(__CLASS__);
+        }else{
+            return array("id"=>1);
+        }
+    }
+    
+    public function fromArray2($dados){
+        $aux = array(
+            "nome"=>$dados['nome'],
+            "descricao"=>$dados['descricao'],
+            "duracao"=>$dados['duracao'],
+            "palestrante"=>$dados['palestrante'],
+            "mini"=>$dados['mini'],
+            "inicio"=>$dados['inicio'],
+            "fim"=>$dados['fim'],
+            "dia_dataDia"=>$dados['dia_dataDia']
+        );
+        $this->data = $aux;
+    }
     /* private $cidade; */
     
     /**

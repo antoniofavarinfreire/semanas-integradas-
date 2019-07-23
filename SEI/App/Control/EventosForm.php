@@ -5,6 +5,7 @@ use Livro\Widgets\Form\Form;
 use Livro\Widgets\Form\Password;
 use Livro\Widgets\Dialog\Message;
 use Livro\Widgets\Form\Entry;
+use Livro\Widgets\Form\Time;
 use Livro\Widgets\Form\Combo;
 use Livro\Widgets\Form\CheckGroup;
 use Livro\Database\Transaction;
@@ -14,7 +15,7 @@ use Livro\Widgets\Wrapper\FormWrapper;
 /**
  * Formulário de atividades
  */
-class AtividadesForm extends Page
+class EventosForm extends Page
 {
     private $form;
 
@@ -26,7 +27,7 @@ class AtividadesForm extends Page
         parent::__construct();
         // instancia um formulário
         $this->form = new FormWrapper(new Form('form_atividades'));
-        $this->form->setTitle('Atividade');
+        $this->form->setTitle('Evento');
         
         // cria os campos do formulário
         $id        = new Entry('id');
@@ -36,16 +37,21 @@ class AtividadesForm extends Page
         $minicurriculo          =  new Entry('mini');
         $sala                       = new Entry('sala');
 
-        $hora_i           = new Entry('inico');
-        $hora_f           = new Entry('fim');
+        $hora_i           = new Time('inicio');
+        $hora_f           = new Time('fim');
         $cargahoraria           = new Entry('duracao');
-        
-        $tipo     = new CheckGroup('ids_tipo');
-        $tipo->setLayout('horizontal');
+        $dia = new Combo('dia_dataDia');
+        $tipo     = new Combo('tipo');
         
         
         Transaction::open('sei');
         
+        $dias = Dia::all();
+        $items = array();
+        foreach ($dias as $obj_tipo) {
+            $items[$obj_tipo->dataDia] = $obj_tipo->semanaDia.' - '.$obj_tipo->dataDia;
+        }
+        $dia->addItems($items);
         $tipos = Tipo::all();
         $items = array();
         foreach ($tipos as $obj_tipo) {
@@ -54,7 +60,7 @@ class AtividadesForm extends Page
         $tipo->addItems($items);
         Transaction::close();
         
-        $this->form->addField('Nome', $titulo, '30%');
+        $this->form->addField('Nome', $titulo, '25%');
         $this->form->addField('Descrição', $descricao, '70%');
         $this->form->addField('Palestrante', $palestrante, '70%');
         $this->form->addField('Mini Curriculo', $minicurriculo, '70%');
@@ -63,7 +69,7 @@ class AtividadesForm extends Page
         $this->form->addField('Hora de Inicio', $hora_i, '30%');
         $this->form->addField('Hora de Fim', $hora_f, '30%');
         //add dia das atividades
-        
+        $this->form->addField('Dia', $dia, '50%');
         $this->form->addField('Tipo', $tipo, '70%');
         
         // define alguns atributos para os campos do formulário
@@ -90,24 +96,15 @@ class AtividadesForm extends Page
                 $dados->hora_f= strtotime($dados->hora_f);
             if(is_string($dados->hora_i))
                 $dados->hora_i = strtotime($dados->hora_i); */
-            $dados->cargahoraria = strtotime($dados->hora_f) - strtotime($dados->hora_i);
+            $dados->duracao = strtotime($dados->fim) - strtotime($dados->inicio);
             
-           
-
-
             $this->form->setData($dados);
-            $atividade = new Atividade; // instancia objeto
-            $atividade->fromArray( (array) $dados); // carrega os dados
+            $atividade = new Evento; // instancia objeto
+            $atividade->fromArray2( (array) $dados); // carrega os dados
             $atividade->store(); // armazena o objeto no banco de dados
-            
-            $atividade->delTipos();
-            if ($dados->ids_tipo) {
-                foreach ($dados->ids_tipo as $id_tipo)
-                {
-                    $atividade->addTipo( new Tipo($id_tipo) );
-                }
-            }
-            
+            $atividade = Evento::last();
+            EventoTipo::associate($atividade->id,$dados->tipo,$dados->dia_dataDia);
+            EventoSala::associate($atividade->id,$dados->sala,$dados->dia_dataDia);
             Transaction::close(); // finaliza a transação
             new Message('info', 'Dados armazenados com sucesso');
         }

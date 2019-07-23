@@ -18,7 +18,7 @@ use Livro\Database\Criteria;
 /**
  * Listagem de Atividades
  */
-class AtividadesList extends Page
+class EventosList extends Page
 {
     private $form;     // formulário de buscas
     private $datagrid; // listagem
@@ -35,28 +35,30 @@ class AtividadesList extends Page
         $this->form = new FormWrapper(new Form('form_busca_atividades'));
         $this->form->setTitle('Eventos');
         
-        $titulo = new Entry('nome');
-        $this->form->addField('Nome', $titulo, '100%');
+        $nome = new Entry('nome');
+        $this->form->addField('Nome', $nome, '100%');
         $this->form->addAction('Buscar', new Action(array($this, 'onReload')));
-        $this->form->addAction('Novo', new Action(array(new AtividadesForm, 'onEdit')));
+        $this->form->addAction('Novo', new Action(array(new EventosForm, 'onEdit')));
         
         // instancia objeto Datagrid
         $this->datagrid = new DatagridWrapper(new Datagrid);
 
         // instancia as colunas da Datagrid
-        $titulo   = new DatagridColumn('nome',         'nome', 'center', '40%');
-        $sala     = new DatagridColumn('sala',       'Sala',    'left', '20%');
+        $nome   = new DatagridColumn('nome',         'Nome', 'center', '40%');
+        $sala     = new DatagridColumn('sala_nome',       'Sala',    'left', '20%');
+        $dia = new DatagridColumn('dia_dataDia','Data','center','20%');
         $horario = new DatagridColumn('inicio',   'Horario','left', '20%');
         
 
         // adiciona as colunas à Datagrid
-        $this->datagrid->addColumn($titulo);
+        $this->datagrid->addColumn($nome);
         $this->datagrid->addColumn($sala);
+        $this->datagrid->addColumn($dia);
         $this->datagrid->addColumn($horario);
         
         
 
-        $this->datagrid->addAction( 'Editar',  new Action([new AtividadesForm, 'onEdit']), 'id', 'fa fa-edit fa-lg blue');
+        $this->datagrid->addAction( 'Editar',  new Action([new EventosForm, 'onEdit']), 'id', 'fa fa-edit fa-lg blue');
         $this->datagrid->addAction( 'Excluir',  new Action([$this, 'onDelete']),         'id', 'fa fa-trash fa-lg red');
         
         // monta a página através de uma caixa
@@ -74,30 +76,24 @@ class AtividadesList extends Page
     public function onReload()
     {
         Transaction::open('sei'); // inicia transação com o BD
-        $repository = new Repository('evento');
-
-        // cria um critério de seleção de dados
-        $criteria = new Criteria;
-        $criteria->setProperty('order', 'nome');
-
+        
         // obtém os dados do formulário de buscas
         $dados = $this->form->getData();
-
-        // verifica se o usuário preencheu o formulário
-        if ($dados->nome)
-        {
-            // filtra pelo nome do atividade
-            $criteria->add('nome', 'like', "%{$dados->nome}%");
-        }
-
         // carrega os produtos que satisfazem o critério
-        $atividades = $repository->load($criteria);
+
+        $atividades = Evento::getlike($dados->nome);
+        if($dados->nome == ""){
+            $atividades = new Eventos();
+            $atividades =$atividades->all2();
+        }
         $this->datagrid->clear();
         if ($atividades)
         {
             foreach ($atividades as $atividade)
             {
                 // adiciona o objeto na Datagrid
+                $d = new DateTime($atividade->dia_dataDia);
+                $atividade->dia_dataDia = (string)($d->format('d/m/y'));
                 $this->datagrid->addItem($atividade);
             }
         }
@@ -112,9 +108,9 @@ class AtividadesList extends Page
      */
     public function onDelete($param)
     {
-        $titulo = $param['nome']; // obtém o parâmetro $id
+        $nome = $param['nome']; // obtém o parâmetro $id
         $action1 = new Action(array($this, 'Delete'));
-        $action1->setParameter('nome', $titulo);
+        $action1->setParameter('nome', $nome);
         
         new Question('Deseja realmente excluir o registro?', $action1);
     }
@@ -126,9 +122,9 @@ class AtividadesList extends Page
     {
         try
         {
-            $titulo = $param['nome']; // obtém a chave
+            $nome = $param['nome']; // obtém a chave
             Transaction::open('livro'); // inicia transação com o banco 'livro'
-            $atividade = Atividade::find($titulo);
+            $atividade = Evento::find($nome);
             $atividade->delete(); // deleta objeto do banco de dados
             Transaction::close(); // finaliza a transação
             $this->onReload(); // recarrega a datagrid
@@ -152,4 +148,5 @@ class AtividadesList extends Page
          }
          parent::show();
     }
+    
 }
