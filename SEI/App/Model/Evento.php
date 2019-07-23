@@ -3,7 +3,7 @@ use Livro\Database\Record;
 use Livro\Database\Criteria;
 use Livro\Database\Repository;
 
-class Atividade extends Record
+class Evento extends Record
 {
     const TABLENAME = 'evento';
     /* private $cidade; */

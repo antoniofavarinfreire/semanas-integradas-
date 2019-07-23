@@ -1,7 +1,7 @@
 <?php
 use Livro\Database\Record;
 
-class AtividadeTipo extends Record
+class EventoTipo extends Record
 {
     const TABLENAME = 'evento_has_tipo';
 }
