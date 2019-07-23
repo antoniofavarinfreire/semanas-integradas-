@@ -129,7 +129,7 @@ class EventosForm extends Page
             {
                 $id = $param['id']; // obtém a chave
                 Transaction::open('sei'); // inicia transação com o BD
-                $atividade = Atividade::find($id);
+                $atividade = Evento::find($id);
                 if ($atividade)
                 {   
                     unset($atividade->password);
