@@ -59,6 +59,7 @@ class EventosList extends Page
         
 
         $this->datagrid->addAction( 'Editar',  new Action([new EventosForm, 'onEdit']), 'id', 'fa fa-edit fa-lg blue');
+        $this->datagrid->addAction( 'Detalhes',  new Action([new EventosDetail, 'onShow']), 'id', 'fa fa-edit fa-lg blue');
         $this->datagrid->addAction( 'Excluir',  new Action([$this, 'onDelete']),         'id', 'fa fa-trash fa-lg red');
         
         // monta a página através de uma caixa
@@ -123,7 +124,7 @@ class EventosList extends Page
         try
         {
             $nome = $param['nome']; // obtém a chave
-            Transaction::open('livro'); // inicia transação com o banco 'livro'
+            Transaction::open('sei'); // inicia transação com o banco 'livro'
             $atividade = Evento::find($nome);
             $atividade->delete(); // deleta objeto do banco de dados
             Transaction::close(); // finaliza a transação

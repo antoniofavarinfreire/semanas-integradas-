@@ -45,7 +45,7 @@ class PessoasList extends Page
 
         // instancia as colunas da Datagrid
         $cpf   = new DatagridColumn('cpf',         'CPF', 'center', '10%');
-        $nome     = new DatagridColumn('nome',       'Nome',    'left', '40%');
+        $nome     = new DatagridColumn('nome',       'Nome',    'left', '35%');
         $email = new DatagridColumn('email',   'Email','left', '30%');
         
 

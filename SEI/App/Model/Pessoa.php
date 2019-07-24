@@ -7,12 +7,13 @@ use Livro\Database\Transaction;
 class Pessoa extends Record
 {
     const TABLENAME = 'pessoa';
+    const PRIMARYKEY = 'cpf';
     // @param [$cpf] cpf do da pessoa Description
     public static function find2($cpf)
     {
         Transaction::open('sei');
         $aux = Transaction::get();
-        $sql = "SELECT * FROM pessoa WHERE cpf=$cpf";
+        $sql = "SELECT * FROM pessoa WHERE cpf='$cpf'";
         Transaction::log($sql);
         $result = $aux->query($sql);
         if($result){
@@ -24,7 +25,12 @@ class Pessoa extends Record
     {
         Transaction::open('sei');
         $aux = Transaction::get();
-        $sql = "DELETE FROM pessoa_has_grupo WHERE pessoa_cpf=$cpf";
+        $img = Pessoa::find2($cpf);
+        $sql = "DELETE FROM pessoa_has_grupo WHERE pessoa_cpf='$cpf'";
+        Transaction::log($sql);
+        $img = $img->imagem_nome;
+        $result = $aux->exec($sql);
+        $sql = "DELETE FROM imagem WHERE nome='$img'";
         Transaction::log($sql);
         $result = $aux->exec($sql);
         $sql = "DELETE FROM pessoa WHERE cpf=$cpf";
@@ -32,102 +38,103 @@ class Pessoa extends Record
         $result = $aux->exec($sql);
         return $result;
     }
-    /* private $cidade; */
-    /**
-     * Retorna a cidade.
-     * Executado sempre se for acessada a propriedade "->cidade"
-     */
-   /*  public function get_cidade()
-    {
-        if (empty($this->cidade))
-            $this->cidade = new Cidade($this->id_cidade);
-        
-        return $this->cidade;
-    } */
-    
-    /**
-     * Retorna o nome da cidade.
-     * Executado sempre se for acessada a propriedade "->nome_cidade"
-     */
-   /*  public function get_nome_cidade()
-    {
-        if (empty($this->cidade))
-            $this->cidade = new Cidade($this->id_cidade);
-        
-        return $this->cidade->nome;
-    } */
-    
-    /**
-     * Adiciona um grupo à pessoa
-     */
-    public function addGrupo(Grupo $grupo)
-    {
-        $pg = new PessoaGrupo;
-        $pg->grupo_id = $grupo->id;
-        $pg->pessoa_cpf = $this->cpf;
-        $pg->store();
+
+    public function verify(){
+        Transaction::open('sei');
+        if(!empty($this->data['cpf'])){
+            $ver = $this->find2($this->data['cpf']);
+            if($ver){
+                throw new Exception('CPF já cadastrado');
+            }else{
+                if(empty($this->data['nome'])){
+                    throw new Exception('Nome não preenchido');
+                }
+                if(empty($this->data['email'])){
+                    throw new Exception('Email não preenchido');
+                }
+                if(empty($this->data['nascimento'])){
+                    throw new Exception('Data de nascimento não preenchida');
+                }
+                if((empty($this->data['senha']))||(empty($this->data['password_check']))){
+                    throw new Exception('Não esqueça de digitar a Senha e sua Confirmação');
+                }else{
+                    if(strcmp($this->data['senha'], $this->data['password_check'])){
+                        throw new Exception("As senhas fornecidas são diferenrtes"); 
+                    }else{
+                        $hash = password_hash($this->data['senha'],PASSWORD_DEFAULT);
+                        $this->data['senha'] = $hash;
+                        $this->data = array(
+                            'cpf' => $this->data['cpf'],
+                            'nome' => $this->data['nome'],
+                            'email' => $this->data['email'],
+                            'nascimento' => $this->data['nascimento'],
+                            'senha' => $this->data['senha'],
+                            'id' => $this->data['id'],
+                            'imagem_nome' => $this->data['imagem_nome'],
+                        );
+                    }
+                }
+            }
+        }else{ 
+           throw new Exception('CPF não preenchido');
+        }
     }
-    
-    /**
-     * Exclui os grupos da pessoa
-     */
-    public function delGrupos()
-    {
-	    $criteria = new Criteria;
-	    $criteria->add('pessoa_cpf', '=', $this->cpf);
-	    
-	    $repo = new Repository('PessoaGrupo');
-	    return $repo->delete($criteria);
+
+    public function verify2(){
+        Transaction::open('sei');
+        if(!empty($this->data['cpf'])){
+                if(empty($this->data['nome'])){
+                    throw new Exception('Nome não preenchido');
+                }
+                if(empty($this->data['email'])){
+                    throw new Exception('Email não preenchido');
+                }
+                if(empty($this->data['nascimento'])){
+                    throw new Exception('Data de nascimento não preenchida');
+                }
+                if((empty($this->data['senha']))||(empty($this->data['password_check']))){
+                    throw new Exception('Não esqueça de digitar a Senha e sua Confirmação');
+                }else{
+                    if(strcmp($this->data['senha'], $this->data['password_check'])){
+                        throw new Exception("As senhas fornecidas são diferenrtes"); 
+                    }else{
+                        $hash = password_hash($this->data['senha'],PASSWORD_DEFAULT);
+                        $this->data['senha'] = $hash;
+                        $this->data = array(
+                            'cpf' => $this->data['cpf'],
+                            'nome' => $this->data['nome'],
+                            'email' => $this->data['email'],
+                            'nascimento' => $this->data['nascimento'],
+                            'senha' => $this->data['senha'],
+                            'id' => $this->data['id'],
+                            'imagem_nome' => $this->data['imagem_nome'],
+                        );
+                    }
+                }
+        }else{ 
+           throw new Exception('CPF não preenchido');
+        }
     }
-    
-    /**
-     * Retorna os grupos da pessoa
-     */
-    public function getGrupos()
-    {
-        $grupos = array();
-	    $criteria = new Criteria;
-	    $criteria->add('pessoa_cpf', '=', $this->cpf);
-	    
-	    $repo = new Repository('PessoaGrupo');
-	    $vinculos = $repo->load($criteria);
-	    if ($vinculos) {
-	        foreach ($vinculos as $vinculo) {
-	            $grupos[] = new Grupo($vinculo->grupo_id);
-	        }
-	    }
-	    return $grupos;
+    public function update(){
+        $this->verify2();
+        Transaction::open('sei');
+        $aux = Transaction::get();
+        $pessoa = Pessoa::find2($this->data['cpf']);
+        $this->data['id'] = $pessoa->id;
+        $this->data['imagem_nome'] = $pessoa->imagem_nome;
+        $sql = "UPDATE pessoa SET ";
+        foreach($this->data as $k => $v){
+            if($k == "id"){
+                $sql.= "$k = $v, ";
+            }elseif($k == 'cpf'){
+                $sql .= "";
+            }else{
+                $sql.= "$k = '$v', ";
+            }
+        }
+        $sql = substr($sql,0,-2);
+        $cpf = $this->data['cpf'];
+        $sql.= " WHERE cpf='$cpf'";
+        $aux->query($sql);
     }
-    
-    /**
-     * Retorna os ID's de grupos da pessoa
-     */
-    public function getIdsGrupos()
-    {
-        $grupos_ids = array();
-	    $grupos = $this->getGrupos();
-	    if ($grupos) {
-	        foreach ($grupos as $grupo) {
-	            $grupos_ids[] = $grupo->id;
-	        }
-	    }
-	    
-	    return $grupos_ids;
-    }
-    
-    /**
-     * Retorna as contas em aberto
-     */
-    /* public function getContasEmAberto()
-    {
-        return Conta::getByPessoa($this->id);
-    } */
-    
-    /**
-     * Retorna o total em débitos
-     */
-   /*  public function totalDebitos()
-    {
-        return Conta::debitosPorPessoa($this->id);
-    } */
 }

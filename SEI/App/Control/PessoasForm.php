@@ -4,6 +4,7 @@ use Livro\Control\Action;
 use Livro\Widgets\Form\Form;
 use Livro\Widgets\Form\Password;
 use Livro\Widgets\Dialog\Message;
+use Livro\Widgets\Form\Hidden;
 use Livro\Widgets\Form\Entry;
 use Livro\Widgets\Form\Combo;
 use Livro\Widgets\Form\CheckGroup;
@@ -18,7 +19,7 @@ use Livro\Widgets\Form\Date;
 class PessoasForm extends Page
 {
     private $form;
-
+    private $act;
     /**
      * Construtor da página
      */
@@ -28,7 +29,6 @@ class PessoasForm extends Page
         // instancia um formulário
         $this->form = new FormWrapper(new Form('form_pessoas'));
         $this->form->setTitle('Pessoa');
-        
         // cria os campos do formulário
         $id        = new Entry('id');
         $cpf       = new Entry('cpf');
@@ -39,8 +39,7 @@ class PessoasForm extends Page
         $password_check     = new password('password_check');
         $grupo     = new CheckGroup('ids_grupos');
         $grupo->setLayout('horizontal');
-        $image = new Entry('imagem_nome');
-        
+        $image = new Hidden('imagem_nome');
         Transaction::open('sei');
         
         $grupos = Grupo::all();
@@ -57,7 +56,6 @@ class PessoasForm extends Page
         $this->form->addField('Nascimento',$nasc,'50%');
         $this->form->addField('Insira uma senha', $password, '50%');
         $this->form->addField('Confirme sua senha', $password_check, '50%');
-
         $this->form->addField('Grupo', $grupo, '70%');
         
         // define alguns atributos para os campos do formulário
@@ -80,35 +78,34 @@ class PessoasForm extends Page
             Transaction::open('sei');
 
             $dados = $this->form->getData();
-            $pass = $this->password($dados->senha,$dados->password_check);
-            if(isset($pass)){
-                unset($dados->password_check);
-                $dados->senha = $pass;
-            }
+
             /****************teste de insercao de imagem************/
-            $imagem = new Imagem;
-            $imagem->nome = $dados->cpf;
-            $imagem->nome .=".png";
-            $imagem->endereco = "shiet";
-            $imagem->tipo = "0";
-            $imagem->store();
+            
             /*********************/
             $this->form->setData($dados);
             $pessoa = new Pessoa; // instancia objeto
             $pessoa->fromArray( (array) $dados); // carrega os dados
-            $pessoa->imagem_nome = $imagem->nome;
-            $pessoa->store(); // armazena o objeto no banco de dados
-            
-            $pessoa->delGrupos();
-            if ($dados->ids_grupos) {
-                foreach ($dados->ids_grupos as $id_grupo)
-                {
-                    $pessoa->addGrupo( new Grupo($id_grupo) );
-                }
+            $this->isEdit($dados->cpf);
+            if($this->act == TRUE){
+                $pessoa->update();
+                PessoaGrupo::unAssociate($pessoa->cpf);
+                PessoaGrupo::associate($pessoa->cpf,$dados->ids_grupos);
+                new Message('info', 'Dados alterados com sucesso');
+            }else{
+                $pessoa->verify();
+                $imagem = new Imagem;
+                $imagem->nome = $dados->cpf;
+                $imagem->nome .=".png";
+                $imagem->endereco = "shiet";
+                $imagem->tipo = "0";
+                $imagem->store();
+                $pessoa->imagem_nome = $imagem->nome;
+                $pessoa->store(); // armazena o objeto no banco de dados
+                PessoaGrupo::associate($pessoa->cpf,$dados->ids_grupos);
+                new Message('info', 'Dados armazenados com sucesso');
             }
             
             Transaction::close(); // finaliza a transação
-            new Message('info', 'Dados armazenados com sucesso');
         }
         catch (Exception $e)
         {
@@ -136,7 +133,7 @@ class PessoasForm extends Page
                 if ($pessoa)
                 {   
                     unset($pessoa->senha);
-                    $pessoa->ids_grupos = $pessoa->getIdsGrupos();
+                    $pessoa->ids_grupos = PessoaGrupo::getIds($pessoa->cpf);
                     $this->form->setData($pessoa); // lança os dados da pessoa no formulário
                 }
                 Transaction::close(); // finaliza a transação
@@ -150,14 +147,11 @@ class PessoasForm extends Page
             Transaction::rollback();
         }
     }
-    private function password($pass, $check){
-       
-        if(strcmp($pass, $check)){
-            throw new Exception("As senhas fornecidas são diferenrtes"); 
-       }else{
-           $hash = password_hash($pass,PASSWORD_DEFAULT);
-            return $hash;
-       }
-       
+    public function isEdit($cpf){
+        Transaction::open('sei'); // inicia transação com o BD
+        $pessoa = Pessoa::find2($cpf);
+        if($pessoa){
+            $this->act = TRUE;
+        }
     }
 }

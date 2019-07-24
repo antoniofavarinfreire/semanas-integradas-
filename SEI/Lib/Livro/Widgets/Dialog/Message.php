@@ -24,6 +24,9 @@ class Message
         else if ($type == 'error')
         {
             $div->class = 'alert alert-danger';
+        }else if($type == 'success')
+        {
+            $div->class = 'alert alert-success';
         }
         $div->add($message);
         $div->show();
