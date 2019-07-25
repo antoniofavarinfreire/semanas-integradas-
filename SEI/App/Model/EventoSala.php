@@ -29,4 +29,41 @@ class EventoSala extends Record
         Transaction::log($sql);
         $aux->query($sql);
     }
+
+    public static function unassociate($evento){
+        Transaction::open('sei');
+        $aux = Transaction::get();
+        $sql = "DELETE FROM evento_has_sala WHERE evento_id=$evento";
+        $aux->query($sql);
+    }
+
+    public static function nome($evento){
+        Transaction::open('sei');
+        $aux = Transaction::get();
+        $sql = "SELECT * FROM evento_has_sala WHERE evento_id=$evento";
+        Transaction::log($sql);
+        $result = $aux->query($sql);
+        if($result){
+            $sala = $result->fetchObject(__CLASS__);
+            $sala = $sala->data['sala_nome'];
+            return $sala;
+        }else{
+            throw new Exception('Erro ao carregar a sala');
+        }
+    }
+
+    public static function onThis($sala){
+        Transaction::open('sei');
+        $aux = Transaction::get();
+        $sql = "SELECT * FROM evento_has_sala WHERE sala_nome=$sala";
+        Transaction::log($sql);
+        $result = $aux->query($sql);
+        $results = array();
+        if($result){
+            while($row = $result->fetchObject(__CLASS__)){
+                $results[] = $row;
+            }
+            return $results;
+        }
+    }
 }

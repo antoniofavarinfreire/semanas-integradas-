@@ -59,22 +59,21 @@ class EventosForm extends Page
         }
         $tipo->addItems($items);
         Transaction::close();
-        
-        $this->form->addField('Nome', $titulo, '25%');
+        $this->form->addField('ID',$id,'70%');
+        $this->form->addField('Nome', $titulo, '70%');
         $this->form->addField('Descrição', $descricao, '70%');
         $this->form->addField('Palestrante', $palestrante, '70%');
         $this->form->addField('Mini Curriculo', $minicurriculo, '70%');
 
         $this->form->addField('Sala', $sala, '20%');
-        $this->form->addField('Hora de Inicio', $hora_i, '30%');
-        $this->form->addField('Hora de Fim', $hora_f, '30%');
+        $this->form->addField('Hora de Inicio', $hora_i, '20%');
+        $this->form->addField('Hora de Fim', $hora_f, '20%');
         //add dia das atividades
         $this->form->addField('Dia', $dia, '50%');
-        $this->form->addField('Tipo', $tipo, '70%');
+        $this->form->addField('Tipo', $tipo, '50%');
         
         // define alguns atributos para os campos do formulário
         $id->setEditable(false);
-        
         $this->form->addAction('Cadastrar', new Action(array($this, 'onSave')));
         
         // adiciona o formulário na página
@@ -100,9 +99,13 @@ class EventosForm extends Page
             
             $this->form->setData($dados);
             $atividade = new Evento; // instancia objeto
+            $atividade->fromArray((array) $dados);
+            $atividade->verify();
             $atividade->fromArray2( (array) $dados); // carrega os dados
             $atividade->store(); // armazena o objeto no banco de dados
             $atividade = Evento::last();
+            EventoTipo::unassociate($atividade->id);
+            EventoSala::unassociate($atividade->id);
             EventoTipo::associate($atividade->id,$dados->tipo,$dados->dia_dataDia);
             EventoSala::associate($atividade->id,$dados->sala,$dados->dia_dataDia);
             Transaction::close(); // finaliza a transação
@@ -132,8 +135,8 @@ class EventosForm extends Page
                 $atividade = Evento::find($id);
                 if ($atividade)
                 {   
-                    unset($atividade->password);
-                    $atividade->ids_tipos = $atividade->getIdsGrupos();
+                    $atividade->sala = EventoSala::nome($atividade->id);
+                    $atividade->tipo = EventoTipo::id($atividade->id);
                     $this->form->setData($atividade); // lança os dados da atividade no formulário
                 }
                 Transaction::close(); // finaliza a transação

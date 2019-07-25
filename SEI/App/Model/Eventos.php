@@ -7,7 +7,7 @@ class Eventos extends Record{
 
         public function all2(){
                 Transaction::open('sei');
-                $sql = "select evento.id, evento.nome, evento_has_sala.sala_nome, evento.inicio, evento.dia_dataDia FROM evento join evento_has_sala";
+                $sql = "select e.id, e.nome, es.sala_nome, e.inicio, e.dia_dataDia from evento e join evento_has_sala es where e.id = es.evento_id" ;
                 $aux = Transaction::get();
                 Transaction::log($sql);
                 $result = $aux->query($sql);

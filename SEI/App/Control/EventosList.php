@@ -109,9 +109,9 @@ class EventosList extends Page
      */
     public function onDelete($param)
     {
-        $nome = $param['nome']; // obtém o parâmetro $id
+        $id = $param['id']; // obtém o parâmetro $id
         $action1 = new Action(array($this, 'Delete'));
-        $action1->setParameter('nome', $nome);
+        $action1->setParameter('id', $id);
         
         new Question('Deseja realmente excluir o registro?', $action1);
     }
@@ -123,9 +123,11 @@ class EventosList extends Page
     {
         try
         {
-            $nome = $param['nome']; // obtém a chave
+            $id = $param['id']; // obtém a chave
             Transaction::open('sei'); // inicia transação com o banco 'livro'
-            $atividade = Evento::find($nome);
+            $atividade = Evento::find($id);
+            EventoSala::unassociate($id);
+            EventoTipo::unassociate($id);
             $atividade->delete(); // deleta objeto do banco de dados
             Transaction::close(); // finaliza a transação
             $this->onReload(); // recarrega a datagrid
