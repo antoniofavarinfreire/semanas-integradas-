@@ -6,12 +6,12 @@ use Livro\Database\Repository;
 use Livro\Database\Transaction;
 
 Class Lista extends Record{
-        const TABLENAME = 'pessoa_has_evento';
+        const TABLENAME = 'lista';
         
-        public static function list($cpf){
+        public static function list($evento){
             Transaction::open('sei');
             $aux = Transaction::get();
-            $sql = "SELECT * FROM pessoa_has_evento WHERE pessoa_cpf=$cpf";
+            $sql = "SELECT pessoa.nome nome, pessoa_has_evento.pessoa_cpf cpf, pessoa_has_evento.presenca presenca, pessoa_has_evento.espera espera, pessoa_has_evento.confirmacao confirmacao from pessoa join pessoa_has_evento on pessoa.cpf=cpf where evento_id=$evento";
             Transaction::log($sql);
             $result = $aux->query($sql);
             $results=FALSE;

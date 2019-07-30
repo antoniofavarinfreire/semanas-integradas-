@@ -54,16 +54,42 @@ class EventosDetail extends Page{
         $this->datagrid2->addColumn($sala);
         $this->datagrid2->addColumn($descricao);
         
+        $this->datagrid4 = new DatagridWrapper(new Datagrid);
+        $this->datagrid4->setTitle('Lista');
+
+        $nome = new DatagridColumn('nome', 'Nome', 'center', '25%');
+        $cpf = new DatagridColumn('cpf', 'CPF', 'center', '25%');
+        $espera = new DatagridColumn('espera', 'Espera', 'center', '10%');
+        $confirmacao = new DatagridColumn('confirmacao', 'Confirmação', 'center', '10%');
+        $presenca = new DatagridColumn('presenca', 'Presença', 'center', '10%');
+
+        $this->datagrid4->addColumn($nome);
+        $this->datagrid4->addColumn($cpf);
+        $this->datagrid4->addColumn($espera);
+        $this->datagrid4->addColumn($confirmacao);
+        $this->datagrid4->addColumn($presenca);
+        
+        
         $box = new VBox;
         $box->style = 'display:block';
         $box->add($this->datagrid1);
         $box->add($this->datagrid3);
         $box->add($this->datagrid2);
-        
+        $box->add($this->datagrid4);
+
         parent::add($box);
     }
 
-    public function onShow(){
-
+    public function onShow($param){
+        Transaction::open('sei');
+        $evento = Evento::find($param['id']);
+        $aux = EventoSala::nome($param['id']);
+        $sala = Sala::find2($aux);
+        $lista = Lista::list($param['id']);
+        $this->datagrid->addItem($evento->data);
+        /*$this->datagrid3->addItem($evento);
+        $this->datagrid2->addItem($sala);
+        $this->datagrid4->addItem($lista);
+        */
     }
 }
