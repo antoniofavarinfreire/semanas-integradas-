@@ -23,7 +23,7 @@ $al->register();
 $loader = require 'vendor/autoload.php';
 $loader->register();
 
-$template = file_get_contents('App/Templates/template.html');
+$template = file_get_contents('App/Templates/adm.html');
 $content = '';
 $class   = 'Home';
 

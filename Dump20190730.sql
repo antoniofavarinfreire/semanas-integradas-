@@ -447,7 +447,7 @@ UNLOCK TABLES;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
 /*!50001 SET character_set_client      = utf8mb4 */;
 /*!50001 SET character_set_results     = utf8mb4 */;
-/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`sge`@`localhost` SQL SECURITY DEFINER */
 /*!50001 VIEW `lista` AS select `pessoa`.`nome` AS `nome`,`pessoa_has_evento`.`pessoa_cpf` AS `cpf`,`pessoa_has_evento`.`presenca` AS `presenca`,`pessoa_has_evento`.`espera` AS `espera`,`pessoa_has_evento`.`confirmacao` AS `confirmacao` from (`pessoa` join `pessoa_has_evento` on((`pessoa`.`cpf` = `pessoa`.`cpf`))) */;
