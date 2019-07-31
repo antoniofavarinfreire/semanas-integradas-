@@ -7,7 +7,6 @@ use Livro\Widgets\Form\Password;
 use Livro\Widgets\Wrapper\FormWrapper;
 use Livro\Widgets\Container\Panel;
 use Livro\Widgets\Dialog\Message;
-
 use Livro\Database\Transaction;
 use Livro\Database\Repository;
 use Livro\Database\Criteria;
@@ -39,9 +38,10 @@ class LoginForm extends Page
         $login->placeholder    = 'admin';
         $password->placeholder = 'admin';
         
-        $this->form->addField('Login',    $login,    200);
-        $this->form->addField('Senha',    $password, 200);
+        $this->form->addField('Login', $login, '100%');
+        $this->form->addField('Senha', $password, '100%');
         $this->form->addAction('Login', new Action(array($this, 'onLogin')));
+        $this->form->addAction('Esqueci Minha Senha', new Action(array($this, 'onLost')));
         
         // adiciona o formulário na página
         parent::add($this->form);
@@ -50,6 +50,10 @@ class LoginForm extends Page
     /**
      * Login
      */
+    public function onLost(){
+        
+    }
+
     public function onLogin($param)
     {
         try {
