@@ -29,13 +29,14 @@ class PresencaQR extends Page{
         $this->form->addField('Nome',$evento,'20%');
         $this->form->addField('ID',$eventoid,'20%');
 
-        $this->form->addAction(new Action(array($this, 'onPresenca')));
+        $this->form->addAction('Dar Presença',new Action(array($this, 'onPresenca')));
 
         parent::add($this->form);
     }
 
     public function onPresenca(){
-        
+        $data = $this->form->getData();
+        new Message('info','Em Produção');
     }
 }
 

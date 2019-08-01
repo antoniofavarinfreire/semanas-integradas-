@@ -106,6 +106,7 @@ class EventosForm extends Page
             $atividade = Evento::last();
             EventoTipo::unassociate($atividade->id);
             EventoSala::unassociate($atividade->id);
+            ImagemEvento::asssociate($atividade);
             EventoTipo::associate($atividade->id,$dados->tipo,$dados->dia_dataDia);
             EventoSala::associate($atividade->id,$dados->sala,$dados->dia_dataDia);
             Transaction::close(); // finaliza a transação
