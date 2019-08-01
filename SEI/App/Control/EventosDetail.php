@@ -26,7 +26,7 @@ class EventosDetail extends Page{
         parent::__construct();
 
         $this->datagrid1 = new DatagridWrapper(new Datagrid);
-        $this->datagrid1->setTitle('Evento em Detalhes');
+        
 
         $nome = new DatagridColumn('nome','Nome','center','30%');
         $inicio = new DatagridColumn('inicio','Inicio','center','20%');
@@ -39,14 +39,14 @@ class EventosDetail extends Page{
         $this->datagrid1->addColumn($fim);
         
         $this->datagrid3 = new DatagridWrapper(new Datagrid);
-        $this->datagrid3->setTitle('Descricao');
+        
 
         $descricao= new DatagridColumn('descricao','Descrição', 'left','90%');
 
         $this->datagrid3->addColumn($descricao);
 
         $this->datagrid2 = new DatagridWrapper(new Datagrid);
-        $this->datagrid2->setTitle('Sala');
+        
 
         $sala = new DatagridColumn('nome','Sala','center','10%');
         $descricao= new DatagridColumn('descricao','Descrição', 'center','90%');
@@ -55,7 +55,7 @@ class EventosDetail extends Page{
         $this->datagrid2->addColumn($descricao);
         
         $this->datagrid4 = new DatagridWrapper(new Datagrid);
-        $this->datagrid4->setTitle('Lista');
+        
 
         $nome = new DatagridColumn('nome', 'Nome', 'center', '25%');
         $cpf = new DatagridColumn('cpf', 'CPF', 'center', '25%');
@@ -86,10 +86,9 @@ class EventosDetail extends Page{
         $aux = EventoSala::nome($param['id']);
         $sala = Sala::find2($aux);
         $lista = Lista::list($param['id']);
-        $this->datagrid->addItem($evento->data);
-        /*$this->datagrid3->addItem($evento);
+        $this->datagrid1->addItem($evento);
+        $this->datagrid3->addItem($evento);
         $this->datagrid2->addItem($sala);
         $this->datagrid4->addItem($lista);
-        */
     }
 }
