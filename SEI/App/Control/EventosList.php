@@ -45,8 +45,8 @@ class EventosList extends Page
 
         // instancia as colunas da Datagrid
         $nome   = new DatagridColumn('nome',         'Nome', 'center', '40%');
-        $sala     = new DatagridColumn('sala_nome',       'Sala',    'left', '20%');
-        $dia = new DatagridColumn('dia_dataDia','Data','center','20%');
+        $sala     = new DatagridColumn('local',       'Sala',    'left', '20%');
+        $dia = new DatagridColumn('dia_dia','Data','center','20%');
         $horario = new DatagridColumn('inicio',   'Horario','left', '20%');
         
 
@@ -84,8 +84,7 @@ class EventosList extends Page
 
         $atividades = Evento::getlike($dados->nome);
         if($dados->nome == ""){
-            $atividades = new Eventos();
-            $atividades =$atividades->all2();
+            $atividades = Evento::all();
         }
         $this->datagrid->clear();
         if ($atividades)
@@ -93,8 +92,8 @@ class EventosList extends Page
             foreach ($atividades as $atividade)
             {
                 // adiciona o objeto na Datagrid
-                $d = new DateTime($atividade->dia_dataDia);
-                $atividade->dia_dataDia = (string)($d->format('d/m/y'));
+                $d = new DateTime($atividade->dia_dia);
+                $atividade->dia_dia = (string)($d->format('d/m/y'));
                 $this->datagrid->addItem($atividade);
             }
         }

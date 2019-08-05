@@ -11,10 +11,10 @@ Class Lista extends Record{
         public static function list($evento){
             Transaction::open('sei');
             $aux = Transaction::get();
-            $sql = "SELECT pessoa.nome nome, pessoa_has_evento.pessoa_cpf cpf, pessoa_has_evento.presenca presenca, pessoa_has_evento.espera espera, pessoa_has_evento.confirmacao confirmacao from pessoa join pessoa_has_evento on pessoa.cpf=cpf where evento_id=$evento";
+            $sql = "SELECT pessoa.nome nome, pessoa_has_evento.pessoa_cpf cpf, pessoa_has_evento.datainscricao dataInsc, pessoa_has_evento.horainscricao hora from pessoa join pessoa_has_evento on pessoa.cpf=pessoa_has_evento.pessoa_cpf where pessoa_has_evento.evento_id=$evento";
             Transaction::log($sql);
             $result = $aux->query($sql);
-            $results=FALSE;
+            $results=array();
             if ($result){
                     // percorre os resultados da consulta, retornando um objeto
                 while ($row = $result->fetchObject(__CLASS__)){

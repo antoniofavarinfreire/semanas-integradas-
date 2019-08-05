@@ -39,7 +39,6 @@ class PessoasForm extends Page
         $password_check     = new password('password_check');
         $grupo     = new CheckGroup('ids_grupos');
         $grupo->setLayout('horizontal');
-        $image = new Hidden('imagem_nome');
         Transaction::open('sei');
         
         $grupos = Grupo::all();
@@ -93,13 +92,6 @@ class PessoasForm extends Page
                 new Message('info', 'Dados alterados com sucesso');
             }else{
                 $pessoa->verify();
-                $imagem = new Imagem;
-                $imagem->nome = $dados->cpf;
-                $imagem->nome .=".png";
-                $imagem->endereco = "shiet";
-                $imagem->tipo = "0";
-                $imagem->store();
-                $pessoa->imagem_nome = $imagem->nome;
                 $pessoa->store(); // armazena o objeto no banco de dados
                 PessoaGrupo::associate($pessoa->cpf,$dados->ids_grupos);
                 new Message('info', 'Dados armazenados com sucesso');

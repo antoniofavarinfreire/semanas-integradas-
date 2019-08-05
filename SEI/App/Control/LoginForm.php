@@ -41,7 +41,7 @@ class LoginForm extends Page
         $this->form->addField('Login', $login, '100%');
         $this->form->addField('Senha', $password, '100%');
         $this->form->addAction('Login', new Action(array($this, 'onLogin')));
-        $this->form->addAction('Esqueci Minha Senha', new Action(array($this, 'onLost')));
+        $this->form->addAction('Esqueci Minha Senha', new Action(array(new passRecover ,'onChange')));
         
         // adiciona o formulário na página
         parent::add($this->form);
@@ -58,27 +58,11 @@ class LoginForm extends Page
     {
         try {
             $data = $this->form->getData();
-            if (isset($data->login) AND isset($data->password)){
+            if (!empty($data->login) AND !empty($data->password)){
                 Transaction::open('sei'); // inicia transação com o BD
-                $repository = new Repository('Pessoa');
-    
-                // cria um critério de seleção de dados
-                $criteria = new Criteria;
-                $criteria->setProperty('order', 'cpf');
-    
+                $autorized = $this->logon($data->login, $data->password);
                 
-    
-            // verifica se o usuário preencheu o formulário
-            
-    
-                // filtra pelo nome do pessoa
-                $criteria->add('cpf',"like", "%{$data->login}%",null);
-                $pessoas = $repository->load($criteria);
-                $autorized = $this->auth($pessoas,$data);
                 if($autorized){
-                    Session::setValue('logged', TRUE);
-                    Session::setValue('user', $pessoas->cpf);
-                    Session::setValue('message', "Seja Bem-vindo".$user->nome );
                     echo "<script language='JavaScript'> window.location = 'index.php'; </script>";
                 }
             
@@ -90,52 +74,42 @@ class LoginForm extends Page
             Session::setValue('logged', FALSE);
             Transaction::rollback();
         }
-        
-           
-
-    }
-    
-
-    public function auth($pessoas,$data){
-        if($pessoas){
-            $user = $pessoas[0];
-            $hash = $user->password;
-            
-            if(password_verify($data->password,$hash)){
-               return true;
-            }else{
-                throw new Exception("A senha esta incorreta!"); 
-            }
-        }else{
-            throw new Exception("Usuário não cadastrado!"); 
-        }
-        
-        
     }
 
     /**
      * Logout
      */
     
+    public function logon($cpf,$pass){
+        Transaction::open('sei');
+        $aux = Transaction::get();
+        $pass =  password_hash($pass,PASSWORD_DEFAULT);
+        $sql  = "SELECT count(*) FROM pessoa WHERE cpf='$cpf' AND senha='$pass'";
+        $result = $aux->query($sql);
+        if($result){
+            session_start();
+            $_SESSION['cpf'] = $cpf;
+            $sql  = "SELECT grupo_id FROM pessoa_has_grupo WHERE pessoa_cpf='$cpf'";
+            $result = $aux->query($sql);
+            $gg = array();
+            if($result){
+                while($row = $result->fetchObject(__CLASS__)){
+                    $gg[] = $row->grupo_id;
+                }
+            }
+            $_SESSION['tipo'] = $gg;
+            return True;
+        }else{
+            throw new Exception('Usuário ou Senha invalidos');
+            return false;
+        }
 
+    }
     
     public function onLogout($param)
     {   
-        new Session;
-        if (Session::getValue('logged')) {
-            Session::setValue('logged', FALSE);
-            Session::setValue('user', '');
-            Session::setValue('message', '' );
-            Session::freeSession();
-        
-        }
-        
-        
-           
-        
-        
-        
-
+        session_start();
+        unset($_SESSION["cpf"]);
         echo "<script language='JavaScript'> window.location = 'index-login.php'; </script>";
     }
 }

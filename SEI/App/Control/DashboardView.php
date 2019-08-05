@@ -27,7 +27,6 @@ Class DashboardView extends Page{
     public function __construct()
     {
         parent::__construct();
-        
         $this->form = new FormWrapper(new Form('form_pessoa_info'));
         $this->form->setTitle('Informacão e Status');
 

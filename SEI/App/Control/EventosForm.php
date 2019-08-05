@@ -35,10 +35,9 @@ class EventosForm extends Page
         $descricao      = new Entry('descricao');
         $palestrante        = new Entry('palestrante');
         $minicurriculo          =  new Entry('mini');
-        $sala                       = new Entry('sala');
+        $sala                       = new Entry('local');
 
         $hora_i           = new Time('inicio');
-        $hora_f           = new Time('fim');
         $cargahoraria           = new Entry('duracao');
         $dia = new Combo('dia_dataDia');
         $tipo     = new Combo('tipo');
@@ -49,7 +48,7 @@ class EventosForm extends Page
         $dias = Dia::all();
         $items = array();
         foreach ($dias as $obj_tipo) {
-            $items[$obj_tipo->dataDia] = $obj_tipo->semanaDia.' - '.$obj_tipo->dataDia;
+            $items[$obj_tipo->dia] = $obj_tipo->semanaDia.' - '.$obj_tipo->dia;
         }
         $dia->addItems($items);
         $tipos = Tipo::all();
@@ -65,9 +64,9 @@ class EventosForm extends Page
         $this->form->addField('Palestrante', $palestrante, '70%');
         $this->form->addField('Mini Curriculo', $minicurriculo, '70%');
 
-        $this->form->addField('Sala', $sala, '20%');
+        $this->form->addField('Local', $sala, '20%');
         $this->form->addField('Hora de Inicio', $hora_i, '20%');
-        $this->form->addField('Hora de Fim', $hora_f, '20%');
+        $this->form->addField('Duração', $cargahoraria, '20%');
         //add dia das atividades
         $this->form->addField('Dia', $dia, '50%');
         $this->form->addField('Tipo', $tipo, '50%');
@@ -136,7 +135,6 @@ class EventosForm extends Page
                 $atividade = Evento::find($id);
                 if ($atividade)
                 {   
-                    $atividade->sala = EventoSala::nome($atividade->id);
                     $atividade->tipo = EventoTipo::id($atividade->id);
                     $this->form->setData($atividade); // lança os dados da atividade no formulário
                 }
