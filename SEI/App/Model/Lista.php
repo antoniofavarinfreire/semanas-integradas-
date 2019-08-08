@@ -8,6 +8,7 @@ use Livro\Database\Transaction;
 Class Lista extends Record{
         const TABLENAME = 'lista';
         
+
         public static function list($evento){
             Transaction::open('sei');
             $aux = Transaction::get();

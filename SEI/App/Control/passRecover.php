@@ -50,7 +50,7 @@ class passRecover extends page{
                 if($data->senha != $data->conf){
                     throw new Exception('Senha e Confirmação estão diferentes');
                 }else{
-                    $pass =  password_hash($data->senha,PASSWORD_DEFAULT);
+                    $pass =  hash('sha512',$data->senha);
                     Transaction::open('sei');
                     $aux = Transaction::get();
                     $sql = "UPDATE pessoa SET senha='$pass' WHERE cpf='$data->cpf'";

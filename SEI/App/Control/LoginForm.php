@@ -61,7 +61,6 @@ class LoginForm extends Page
             if (!empty($data->login) AND !empty($data->password)){
                 Transaction::open('sei'); // inicia transação com o BD
                 $autorized = $this->logon($data->login, $data->password);
-                
                 if($autorized){
                     echo "<script language='JavaScript'> window.location = 'index.php'; </script>";
                 }
@@ -83,10 +82,14 @@ class LoginForm extends Page
     public function logon($cpf,$pass){
         Transaction::open('sei');
         $aux = Transaction::get();
-        $pass =  password_hash($pass,PASSWORD_DEFAULT);
-        $sql  = "SELECT count(*) FROM pessoa WHERE cpf='$cpf' AND senha='$pass'";
+        $pass = hash('sha512',$pass);
+        $sql  = "SELECT * FROM pessoa WHERE cpf='$cpf' AND senha='$pass'";
         $result = $aux->query($sql);
         if($result){
+            $result = $result->rowCount();
+            if($result == 0){
+                throw new Exception('Usuário e/ou senha incorretos');
+            }
             session_start();
             $_SESSION['cpf'] = $cpf;
             $sql  = "SELECT grupo_id FROM pessoa_has_grupo WHERE pessoa_cpf='$cpf'";
@@ -110,6 +113,7 @@ class LoginForm extends Page
     {   
         session_start();
         unset($_SESSION["cpf"]);
-        echo "<script language='JavaScript'> window.location = 'index-login.php'; </script>";
+        session_destroy();
+        echo "<script language='JavaScript'> window.location = 'index.php'; </script>";
     }
 }
