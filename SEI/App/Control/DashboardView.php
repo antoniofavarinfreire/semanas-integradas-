@@ -95,7 +95,22 @@ Class DashboardView extends Page{
     }
 
     public function onSave(){
-
+        try{
+            $data = $this->form->getData();
+            if($data->senha == $data->password_check && $data->senha != ''){
+                $pass = hash('sha512',$data->senha);
+                Transaction::open('sei');
+                $aux = Transaction::get();
+                $cpf = $_SESSION['cpf'];
+                $sql = "UPDATE pessoa SET senha='$pass' WHERE cpf='$cpf'";
+                $aux->query($sql);
+                new Message('info','Alteração de Senha Feita com Sucesso');
+            }else{
+                throw new Exception('Preencha igualmente os Campos de Senha');
+            }
+        }catch(Exception $e){
+            new Message('error',$e->getMessage());
+        }
     }
 
     public function show(){
@@ -121,7 +136,7 @@ Class DashboardView extends Page{
             $id = $param['id']; // obtém a chave
             Transaction::open('sei'); // inicia transação com o banco 'livro'
             $cpf = $_SESSION['cpf'];
-            $sql = "DELETE FROM pessoa_has_evento WHERE evento_id = $id AND pessoa_cpf=$cpf";
+            $sql = "DELETE FROM pessoa_has_evento WHERE evento_id=$id and pessoa_cpf='$cpf' ";
             Transaction::get()->query($sql);
             $this->onReload(); // recarrega a datagrid
             new Message('info', "Inscrição no Evento cancelada com sucesso");
