@@ -22,11 +22,9 @@ class PresencaQR extends Page{
         $this->form->setTitle('Presença no Evento');
 
         $cpf = new Entry('cpf');
-        $evento = new Entry('evento_nome');
         $eventoid = new Entry('id');
 
         $this->form->addField('CPF',$cpf,'20%');
-        $this->form->addField('Nome',$evento,'20%');
         $this->form->addField('ID',$eventoid,'20%');
 
         $this->form->addAction('Dar Presença',new Action(array($this, 'onPresenca')));
@@ -35,8 +33,19 @@ class PresencaQR extends Page{
     }
 
     public function onPresenca(){
-        $data = $this->form->getData();
-        new Message('info','Em Produção');
+        try{
+            if(!in_array(1,$_SESSION['tipo'])){
+                throw new Exception('Usuário não permitido a executar esta operação');
+            }else{
+                $data = $this->form->getData();
+                Transaction::open('sei');
+                $aux = Transaction::get();
+                $sql = "UPDATE FROM pessoa_has_evento SET presenca='s' WHERE evento_id=$data->id AND pessoa_cpf='$data->cpf'";
+                $aux->query($sql);
+            }
+        }catch(Exception $e){
+            new Messege('error', $e->getMessage());
+        }    
     }
 }
 

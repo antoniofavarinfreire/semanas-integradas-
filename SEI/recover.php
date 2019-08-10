@@ -19,31 +19,9 @@ $loader->register();
 
 
 
-if(session_status() !== PHP_SESSION_ACTIVE) session_start();
-if (isset($_SESSION['cpf'])) {
-    if(isset($_COOKIE['evento'])){
-        header('location:Presenca.php');
-    }
-    if(in_array(1,$_SESSION['tipo'])){
-        $template = file_get_contents('App/Templates/adm.html');
-        $class = 'DashboardView';
+$template = file_get_contents('App/Templates/login.html');
+$class = 'passRecover';
 
-    }elseif(in_array(2,$_SESSION['tipo'])){
-        $template = file_get_contents('App/Templates/adm.html');
-        $class = 'DashboardView';
-
-    }
-}
-
-else {
-    $template = file_get_contents('App/Templates/login.html');
-    $class = 'LoginForm';
-}
-
-if (isset($_GET['class']) AND (isset($_SESSION['cpf']))){
-    
-    $class = $_GET['class'];
-}
 
 if (class_exists($class))
 {

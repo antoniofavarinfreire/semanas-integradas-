@@ -4,11 +4,36 @@ use Livro\Database\Criteria;
 use Livro\Database\Repository;
 use Livro\Database\Transaction;
 
+try{
+    $dbBrute = new PDO("mysql:host=localhost;dbname=sge", 'sge', 'indiolambda');
+}catch(PDOException $e){
+    echo $e->getMessage();  
+}
+
 class Pessoa extends Record
 {
     const TABLENAME = 'pessoa';
     const PRIMARYKEY = 'cpf';
     // @param [$cpf] cpf do da pessoa Description
+
+
+    public static function changePass($cpf,$pass){
+        try{
+            $dbBrute = new PDO("mysql:host=localhost;dbname=sge", 'sge', 'indiolambda');
+        }catch(PDOException $e){
+            echo $e->getMessage();  
+        }
+        $sql = "UPDATE pessoa SET senha='$pass' WHERE cpf='$cpf'";
+        $result = $dbBrute->prepare($sql);
+        $result->execute();
+        $foi = $result->rowCount();
+        if($foi ==  1){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     public static function find2($cpf)
     {
         Transaction::open('sei');

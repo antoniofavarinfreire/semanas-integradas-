@@ -51,12 +51,12 @@ class passRecover extends page{
                     throw new Exception('Senha e Confirmação estão diferentes');
                 }else{
                     $pass =  hash('sha512',$data->senha);
-                    Transaction::open('sei');
-                    $aux = Transaction::get();
-                    $sql = "UPDATE pessoa SET senha='$pass' WHERE cpf='$data->cpf'";
-                    $result = $aux->query($sql);
+                    $cpf = $data->cpf;
+                    $result = Pessoa::passChange($cpf,$pass);
                     if($result){
-                        echo "<script language='JavaScript'> window.location = 'index-login.php'; </script>";
+                        echo "<script language='JavaScript'> window.location = 'index.php'; </script>";
+                    }else{
+                        throw new Exception('Erro na Troca, Contacte o ADM em suporteSeiCCT@gmail.com');
                     }
                 }
             }catch(Exception $e){

@@ -35,13 +35,13 @@ class LoginForm extends Page
         $login      = new Entry('login');
         $password   = new Password('password');
         
-        $login->placeholder    = 'admin';
-        $password->placeholder = 'admin';
+        $login->placeholder    = 'CPF';
+        $password->placeholder = 'senha';
         
         $this->form->addField('Login', $login, '100%');
         $this->form->addField('Senha', $password, '100%');
         $this->form->addAction('Login', new Action(array($this, 'onLogin')));
-        $this->form->addAction('Esqueci Minha Senha', new Action(array(new passRecover ,'onChange')));
+        $this->form->addAction('Esqueci Minha Senha', new Action(array($this ,'onChange')));
         
         // adiciona o formulário na página
         parent::add($this->form);
@@ -50,8 +50,8 @@ class LoginForm extends Page
     /**
      * Login
      */
-    public function onLost(){
-        
+    public static function onChange($param){
+        echo "<script language='JavaScript'> window.location = 'recover.php'; </script>";
     }
 
     public function onLogin($param)

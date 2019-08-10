@@ -76,6 +76,10 @@ Class DashboardView extends Page{
         parent::add($this->datagrid);
     }
 
+    public static function pospresenca(){
+        new Message('info','Presença Confirmada Com Sucesso');
+    }
+
     public function onLoad(){
         
         Transaction::open('sei');
@@ -99,15 +103,16 @@ Class DashboardView extends Page{
             $data = $this->form->getData();
             if($data->senha == $data->password_check && $data->senha != ''){
                 $pass = hash('sha512',$data->senha);
-                Transaction::open('sei');
-                $aux = Transaction::get();
                 $cpf = $_SESSION['cpf'];
-                $sql = "UPDATE pessoa SET senha='$pass' WHERE cpf='$cpf'";
-                $aux->query($sql);
-                new Message('info','Alteração de Senha Feita com Sucesso');
+                $result = Pessoa::changePass($cpf,$pass);
+                if($result){
+                    new Message('info','Alteração de Senha Feita com Sucesso');
+                }else{
+                    throw new Exception('Erro Inserção');    
+                }
             }else{
                 throw new Exception('Preencha igualmente os Campos de Senha');
-            }
+            }   
         }catch(Exception $e){
             new Message('error',$e->getMessage());
         }
