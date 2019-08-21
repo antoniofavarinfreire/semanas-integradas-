@@ -12,6 +12,7 @@ use Livro\Database\Transaction;
 use Livro\Database\Repository;
 use Livro\Database\Criteria;
 use Dompdf\Exception;
+use Livro\Widgets\Form\Date;
 
 class passRecover extends page{
     private $form;
@@ -20,24 +21,18 @@ class passRecover extends page{
         parent::__construct();
 
         $this->form = new FormWrapper(new Form('form_recover'));
-        $this->form->setTitle('Recuperar Senha');
+        $this->form->setTitle('Resetar Senha');
         
         $login      = new Entry('cpf');
-        $code   = new Entry('code');
-        $pass = new Password('senha');
-        $conf = new Password('conf');
+        $code   = new Date('nasc');
 
         $login->placeholder    = 'CPF';
-        $code->placeholder = 'codigo';
-        $pass->placeholder = 'Senha';
-        $conf->placeholder = 'Confirma Senha';
+        $code->placeholder = 'Data de Nascimento';
         
         $this->form->addField('CPF', $login, '100%');
-        $this->form->addField('Codigo de Confirmação',$code, '100%');
-        $this->form->addField('Senha', $pass, '100%');
-        $this->form->addField('Confirmar Senha', $conf, '100%');
+        $this->form->addField('Data de Nascimento',$code, '100%');
 
-        $this->form->addAction('Trocar Senha', new Action(array($this, 'onChange')));
+        $this->form->addAction('Resetar', new Action(array($this, 'onChange')));
         
         // adiciona o formulário na página
         parent::add($this->form);
@@ -45,46 +40,22 @@ class passRecover extends page{
 
     public function onChange(){ 
         $data = $this->form->getData();
-        if($data->code == $this->passcode($data->cpf)){
-            try{
-                if($data->senha != $data->conf){
-                    throw new Exception('Senha e Confirmação estão diferentes');
-                }else{
-                    $pass =  hash('sha512',$data->senha);
-                    $cpf = $data->cpf;
-                    $result = Pessoa::passChange($cpf,$pass);
-                    if($result){
-                        echo "<script language='JavaScript'> window.location = 'index.php'; </script>";
-                    }else{
-                        throw new Exception('Erro na Troca, Contacte o ADM em suporteSeiCCT@gmail.com');
-                    }
+        $cpf = $data->cpf;
+        $nasc = $data->nasc;
+        if(!empty($cpf)&&(!empty($nasc))){
+            Transaction::open('sei');
+            $aux = Transaction::get();
+            $sql = "SELECT * FROM pessoa WHERE cpf='$cpf' AND nascimento='$nasc'";
+            $result = $aux->query($sql);
+            if($result->rowCount()>0){
+                if(Pessoa::changePass($cpf,$nasc)){
+                    new Message('info','Sua nova senha é seu ano de nascimento seguido dos 3 primeiros digitos do seu CPF. Ex: 2019123');
                 }
-            }catch(Exception $e){
-                new Message('error',$e->getMessage());    
             }
+        }else{
+            throw new Exception('Preencha dos Dois Campos');
         }
     }
 
-    public static function passcode($cpf){
-        try{
-            Transaction::open('sei');
-            $aux = Transaction::get();
-            $sql = "SELECT nome FROM pessoa WHERE cpf=$cpf";
-            if($cpf == ''){
-                throw new Exception('Digite o CPF');
-            }
-            $result = $aux->query($sql);
-            if($result){
-                $result = $result->fetchObject(__CLASS__);
-                $sql = $cpf  + (int)$result->nome + 152022;
-                $sql = (string)$sql;
-                return $sql;
-            }else{
-                throw new Exception('CPF não encontrado');
-            }
-        }catch(Exception $e){
-            new Message('error',$e->getMessage());
-        }
-    }
 }
 ?>

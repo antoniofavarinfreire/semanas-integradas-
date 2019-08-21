@@ -17,12 +17,15 @@ class Pessoa extends Record
     // @param [$cpf] cpf do da pessoa Description
 
 
-    public static function changePass($cpf,$pass){
+    public static function changePass($cpf,$nasc){
         try{
             $dbBrute = new PDO("mysql:host=localhost;dbname=sge", 'sge', 'indiolambda');
         }catch(PDOException $e){
             echo $e->getMessage();  
         }
+        $pass = substr($nasc,0,4);
+        $pass .= substr($cpf,0,3);
+        $pass = hash('sha512',$pass);
         $sql = "UPDATE pessoa SET senha='$pass' WHERE cpf='$cpf'";
         $result = $dbBrute->prepare($sql);
         $result->execute();

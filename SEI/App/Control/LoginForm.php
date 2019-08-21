@@ -90,10 +90,9 @@ class LoginForm extends Page
             if($result == 0){
                 throw new Exception('Usuário e/ou senha incorretos');
             }
-            $logged = 60 * 60 * 24 * 365 * 100;
-            session_set_cookie_params($logged);
             session_start();
             $_SESSION['cpf'] = $cpf;
+            setcookie('cpf',$cpf,time()+86400*7);
             $sql  = "SELECT grupo_id FROM pessoa_has_grupo WHERE pessoa_cpf='$cpf'";
             $result = $aux->query($sql);
             $gg = array();
@@ -115,6 +114,8 @@ class LoginForm extends Page
     {   
         session_start();
         unset($_SESSION["cpf"]);
+        setcookie('cpf',NULL,-1,'/');
+        unset($_COOKIE['cpf']);
         session_destroy();
         echo "<script language='JavaScript'> window.location = 'index.php'; </script>";
     }

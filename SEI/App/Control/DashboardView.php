@@ -24,7 +24,6 @@ Class DashboardView extends Page{
 
     private $form;
     private $datagrid;
-    private $progress;
     private $loaded;
 
     public function __construct()
@@ -63,8 +62,6 @@ Class DashboardView extends Page{
         $local = new DatagridColumn('local','Local','center','15%');
         $presenca = new DatagridColumn('presenca','Presença','center','15%');
 
-
-
         $this->datagrid->addColumn($nome);
         $this->datagrid->addColumn($dia);
         $this->datagrid->addColumn($inicio);
@@ -72,19 +69,8 @@ Class DashboardView extends Page{
         $this->datagrid->addColumn($local);
         $this->datagrid->addColumn($presenca);
         
-        $this->progress = new DatagridWrapper(new Datagrid);
         
         parent::add($this->form);
-        
-        if(in_array(2,$_SESSION['tipo'])){
-            $carga75 = new DatagridColumn('carga75','Carga a Cumprir','center','15%');
-            $carga = new DatagridColumn('cargaRestante','Carga Restante','center','25%');
-            $this->progress->addColumn($carga75);
-            $this->progress->addColumn($carga);
-            parent::add($this->progress);
-
-        }
-        
         parent::add($this->datagrid);
     }
 
@@ -106,10 +92,6 @@ Class DashboardView extends Page{
             $d = new DateTime($e->dia);
             $e->dia  = (string)($d->format('d/m/Y'));
             $this->datagrid->addItem($e);
-        }
-        if(in_array(2,$_SESSION['tipo'])){
-            $academico = Academico::find2($_SESSION['cpf']);
-            $this->progress->addItem($academico);
         }
 
     }
@@ -142,31 +124,7 @@ Class DashboardView extends Page{
          }
          parent::show();
     }
-    
-    public function onDelete($param){
-        $id = $param['id']; // obtém o parâmetro $id
-        $action1 = new Action(array($this, 'Delete'));
-        $action1->setParameter('id', $id);
-        
-        new Question('Deseja realmente cancelar sua inscrição no evento?', $action1);
-    }
 
-    public function delete($param){
-        try
-        {
-            $id = $param['id']; // obtém a chave
-            Transaction::open('sei'); // inicia transação com o banco 'livro'
-            $cpf = $_SESSION['cpf'];
-            $sql = "DELETE FROM pessoa_has_evento WHERE evento_id=$id and pessoa_cpf='$cpf' ";
-            Transaction::get()->query($sql);
-            $this->onReload(); // recarrega a datagrid
-            new Message('info', "Inscrição no Evento cancelada com sucesso");
-        }
-        catch (Exception $e)
-        {
-            new Message('error', $e->getMessage());
-        }
-    }
 }
 
 ?>
