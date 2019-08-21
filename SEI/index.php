@@ -29,7 +29,7 @@ if (isset($_SESSION['cpf'])) {
         $class = 'DashboardView';
 
     }elseif(in_array(2,$_SESSION['tipo'])){
-        $template = file_get_contents('App/Templates/adm.html');
+        $template = file_get_contents('App/Templates/peasant.html');
         $class = 'DashboardView';
 
     }

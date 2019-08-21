@@ -90,6 +90,8 @@ class LoginForm extends Page
             if($result == 0){
                 throw new Exception('Usuário e/ou senha incorretos');
             }
+            $logged = 60 * 60 * 24 * 365 * 100;
+            session_set_cookie_params($logged);
             session_start();
             $_SESSION['cpf'] = $cpf;
             $sql  = "SELECT grupo_id FROM pessoa_has_grupo WHERE pessoa_cpf='$cpf'";
