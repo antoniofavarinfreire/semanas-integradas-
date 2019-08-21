@@ -22,7 +22,7 @@ $loader->register();
 if(session_status() !== PHP_SESSION_ACTIVE) session_start();
 if (isset($_SESSION['cpf'])) {
     if(isset($_COOKIE['evento'])){
-        header('location:Presenca.php');
+        header('location:presenca.php');
     }
     if(in_array(1,$_SESSION['tipo'])){
         $template = file_get_contents('App/Templates/adm.html');
