@@ -28,14 +28,16 @@ class passRecover extends page{
 
         $login->placeholder    = 'CPF';
         $code->placeholder = 'Data de Nascimento';
-        
         $this->form->addField('CPF', $login, '100%');
         $this->form->addField('Data de Nascimento',$code, '100%');
 
         $this->form->addAction('Resetar', new Action(array($this, 'onChange')));
-        
+        $this->form->addAction('Voltar', new Action(array($this, 'onBack')));
         // adiciona o formulário na página
         parent::add($this->form);
+    }   
+    public function onBack(){
+        header("location:index.php");
     }
 
     public function onChange(){ 

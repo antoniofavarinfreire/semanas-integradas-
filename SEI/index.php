@@ -32,6 +32,9 @@ if (isset($_SESSION['cpf'])) {
         $template = file_get_contents('App/Templates/peasant.html');
         $class = 'DashboardView';
 
+    }else{
+        $template = file_get_contents('App/Templates/peasant.html');
+        $class = 'DashboardView';
     }
 }
 
